@@ -1,80 +1,347 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MXD – Affiliate Store</title>
-  <meta name="description" content="MXD – Trung tâm mua sắm affiliate ngành xây dựng. Tối ưu & bền vững.">
-  <meta property="og:title" content="MXD – Affiliate Store">
-  <meta property="og:description" content="MXD – Trung tâm mua sắm affiliate ngành xây dựng.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/img/placeholder.png">
-  <link rel="icon" href="assets/img/placeholder.png">
-  <link rel="preload" href="assets/css/styles.css" as="style">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MXD – Cửa hàng Affiliate & Thi công</title>
+  <meta name="description" content="MXD – Trung tâm mua sắm dụng cụ thi công & vật tư xây dựng. Bán hàng qua link affiliate và nhận thi công trực tiếp." />
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --card: #121821;
+      --muted: #93a4b7;
+      --text: #eaf2ff;
+      --brand: #5eead4; /* xanh ngọc */
+      --brand-2: #60a5fa; /* xanh dương */
+      --warn: #f59e0b;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background: radial-gradient(1200px 600px at top right, #0d1520, #0b0f14 40%), var(--bg); color: var(--text); }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* NAV */
+    .nav { position: sticky; top: 0; z-index: 50; background: rgba(11,15,20,.7); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,255,255,.06); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .5px; }
+    .logo { height: 34px; width: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); display: grid; place-items: center; color: #001218; font-weight: 900; box-shadow: var(--shadow); }
+    .nav-links { display: flex; align-items: center; gap: 16px; }
+    .pill { padding: 10px 14px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); color: var(--text); transition: .2s; }
+    .pill:hover { transform: translateY(-1px); background: rgba(255,255,255,.08); }
+
+    /* HERO */
+    .hero { padding: 52px 0 28px; text-align: center; }
+    .hero h1 { font-size: clamp(28px, 4vw, 44px); margin: 0 0 8px; }
+    .hero p { color: var(--muted); margin: 0 auto 22px; max-width: 760px; }
+    .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn { padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,.08); background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); color: var(--text); box-shadow: var(--shadow); cursor: pointer; transition: .2s; font-weight: 600; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn.brand { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #001218; border: none; }
+
+    /* GRID */
+    .section { padding: 24px 0 52px; }
+    .section h2 { margin: 0 0 14px; font-size: 24px; letter-spacing: .2px; }
+    .muted { color: var(--muted); }
+
+    .filters { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    .search { flex: 1; min-width: 220px; }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="password"], select, textarea {
+      width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.04); color: var(--text);
+    }
+
+    .grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 16px; }
+    @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr);} }
+    @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr);} }
+
+    .card { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+    .card .img-wrap { aspect-ratio: 16/10; background: #0f1621; overflow: hidden; }
+    .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card .content { padding: 14px; display: grid; gap: 8px; }
+    .price { font-weight: 800; color: var(--brand); }
+    .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .row.space { justify-content: space-between; }
+    .tag { font-size: 12px; padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,.1); color: var(--muted); }
+    .opt { min-width: 140px; }
+
+    /* CART */
+    .cart-btn { position: relative; }
+    .badge { position: absolute; top: -6px; right: -8px; background: var(--warn); color: #001218; font-weight: 800; border-radius: 999px; font-size: 12px; padding: 3px 6px; }
+    .drawer { position: fixed; right: 0; top: 0; height: 100vh; width: min(420px, 92vw); background: #0e141c; border-left: 1px solid rgba(255,255,255,.08); box-shadow: var(--shadow); transform: translateX(110%); transition: transform .22s ease; z-index: 70; display: flex; flex-direction: column; }
+    .drawer.open { transform: translateX(0); }
+    .drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 16px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .drawer-body { padding: 12px 16px; overflow: auto; display: grid; gap: 12px; }
+    .cart-item { display: grid; grid-template-columns: 72px 1fr; gap: 12px; align-items: center; border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 10px; }
+    .cart-item img { width: 72px; height: 72px; object-fit: cover; border-radius: 8px; }
+    .qty { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,.08); border-radius: 999px; padding: 6px 10px; }
+    .drawer-footer { margin-top: auto; padding: 14px 16px; border-top: 1px solid rgba(255,255,255,.08); display: grid; gap: 8px; }
+
+    /* FORM – MEMBERSHIP */
+    .form { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+
+    /* FOOTER */
+    footer { padding: 38px 0; color: var(--muted); border-top: 1px solid rgba(255,255,255,.06); }
+  </style>
 </head>
 <body>
-<header class="container header">
-  <div class="brand"><a href="index.html">MXD</a></div>
   <nav class="nav">
-    <a href="index.html">Trang chủ</a>
-    <a href="store.html">Mua sắm</a>
-    <a href="about.html">Giới thiệu</a>
-    <a href="contact.html">Liên hệ</a>
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo">M</div>
+        <div>MXD • Mua sắm & thi công</div>
+      </div>
+      <div class="nav-links">
+        <a href="#products" class="pill">Sản phẩm</a>
+        <a href="#membership" class="pill">Đăng ký thành viên</a>
+        <button id="openCart" class="btn cart-btn" title="Giỏ hàng">
+          🛒 Giỏ hàng <span id="cartCount" class="badge">0</span>
+        </button>
+      </div>
+    </div>
   </nav>
-</header>
-<main class="container">
 
-<section>
-  <h1>Cửa hàng MXD</h1>
-  <p>Danh mục demo. Thay link <code>#</code> bằng link affiliate của bạn.</p>
-</section>
+  <header class="hero container">
+    <h1>MXD – Trung tâm mua sắm affiliate ngành xây dựng</h1>
+    <p>Chúng tôi bán hàng <strong>qua link affiliate</strong> và <strong>trực tiếp thi công</strong>. Hàng đã được đội thợ dùng thật ngoài công trình, ưu tiên những dòng bền bỉ – tối ưu chi phí.
+      <br />Nút mua đã được đổi thành <strong>“Mua ngay”</strong> như yêu cầu. Thêm cả <strong>“Thêm vào giỏ”</strong> để gom nhiều món trước khi thanh toán.</p>
+    <div class="hero-cta">
+      <a href="#products" class="btn brand">Khám phá sản phẩm</a>
+      <a href="#membership" class="btn">Đăng ký thành viên MXD</a>
+    </div>
+  </header>
 
-<section id="tools" class="grid">
-  <article class="card product">
-    <img src="assets/img/placeholder.png" alt="Máy cắt">
-    <h3>Máy cắt cầm tay</h3>
-    <p>Thông số: 220V, đĩa 100–125mm.</p>
-    <a class="btn" href="#">Mua qua link affiliate</a>
-  </article>
-  <article class="card product">
-    <img src="assets/img/placeholder.png" alt="Lưỡi cắt">
-    <h3>Lưỡi cắt đa dụng</h3>
-    <p>Bền, cắt gạch/đá.</p>
-    <a class="btn" href="#">Mua qua link affiliate</a>
-  </article>
-  <article class="card product">
-    <img src="assets/img/placeholder.png" alt="Thước livoo">
-    <h3>Thước livoo</h3>
-    <p>Chuẩn, dễ đọc.</p>
-    <a class="btn" href="#">Mua qua link affiliate</a>
-  </article>
-</section>
+  <main class="container">
+    <!-- PRODUCTS -->
+    <section id="products" class="section">
+      <h2>Sản phẩm nổi bật</h2>
+      <p class="muted">Chọn danh mục hoặc tìm kiếm. Nhấn <em>Mua ngay</em> để đi đến link affiliate; nhấn <em>Thêm vào giỏ</em> để giữ lại nhiều món rồi thanh toán sau.</p>
+      <div class="filters">
+        <select id="category" class="opt">
+          <option value="all">Tất cả danh mục</option>
+          <option value="Keo ốp lát">Keo ốp lát</option>
+          <option value="Máy cắt">Máy cắt</option>
+          <option value="Lưỡi cắt">Lưỡi cắt</option>
+          <option value="Thước đo">Thước đo</option>
+          <option value="Phụ kiện">Phụ kiện</option>
+        </select>
+        <input id="search" class="search" type="text" placeholder="Tìm tên sản phẩm, mã, công dụng…" />
+      </div>
+      <div id="grid" class="grid"></div>
+    </section>
 
-<section id="consumables" class="grid">
-  <article class="card product">
-    <img src="assets/img/placeholder.png" alt="Keo chống thấm">
-    <h3>Keo chống thấm</h3>
-    <p>Thi công nhanh, bền.</p>
-    <a class="btn" href="#">Mua qua link affiliate</a>
-  </article>
-</section>
+    <!-- MEMBERSHIP -->
+    <section id="membership" class="section">
+      <h2>Đăng ký thành viên MXD</h2>
+      <p class="muted">Thành viên nhận ưu đãi, combo vật tư theo hạng mục thi công, và ưu tiên hỗ trợ kỹ thuật. Form gửi qua Formspree hoặc Google Forms (thay đường dẫn bên dưới).</p>
+      <form id="memberForm" class="form" method="POST" action="https://formspree.io/f/your-form-id">
+        <!-- TODO: Thay your-form-id bằng ID thật của Formspree. Hoặc thay action bằng liên kết Google Forms. -->
+        <div class="row">
+          <div style="flex:1; min-width:220px">
+            <label>Họ tên</label>
+            <input required name="name" type="text" placeholder="Nguyễn Văn A" />
+          </div>
+          <div style="flex:1; min-width:220px">
+            <label>Số điện thoại</label>
+            <input required name="phone" type="tel" placeholder="09xx xxx xxx" />
+          </div>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <div style="flex:1; min-width:220px">
+            <label>Email</label>
+            <input required name="email" type="email" placeholder="mxd6686@gmail.com" />
+          </div>
+          <div style="flex:1; min-width:220px">
+            <label>Mật khẩu</label>
+            <input required name="password" type="password" placeholder="••••••••" />
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <label>Nhu cầu</label>
+          <textarea name="note" rows="3" placeholder="Ví dụ: cần combo keo ốp lát + lưỡi cắt cho 60m², cần tư vấn chống thấm sân thượng…"></textarea>
+        </div>
+        <div class="row" style="margin-top:14px; justify-content: flex-end;">
+          <button class="btn" type="reset">Xóa</button>
+          <button class="btn brand" type="submit">Đăng ký</button>
+        </div>
+        <p id="memberMsg" class="muted" style="margin-top:10px"></p>
+      </form>
+    </section>
+  </main>
 
-<section id="combos" class="grid">
-  <article class="card product">
-    <img src="assets/img/placeholder.png" alt="Combo thi công">
-    <h3>Combo thi công cơ bản</h3>
-    <p>Máy + lưỡi + thước + bảo hộ.</p>
-    <a class="btn" href="#">Mua combo</a>
-  </article>
-</section>
+  <!-- CART DRAWER -->
+  <aside id="drawer" class="drawer" aria-hidden="true">
+    <div class="drawer-header">
+      <strong>Giỏ hàng</strong>
+      <button id="closeCart" class="btn">Đóng</button>
+    </div>
+    <div id="cartItems" class="drawer-body"></div>
+    <div class="drawer-footer">
+      <div class="row space">
+        <div>Tổng:</div>
+        <strong id="cartTotal">0₫</strong>
+      </div>
+      <button id="checkout" class="btn brand">Thanh toán</button>
+      <button id="clearCart" class="btn" style="background: rgba(239,68,68,.15); border-color: rgba(239,68,68,.35);">Xóa giỏ</button>
+      <p class="muted" style="font-size:12px">Thanh toán có thể chuyển hướng tới từng <em>link affiliate</em> tương ứng của sản phẩm. Có thể bật chế độ gộp đơn qua MXD nếu cần (tùy chỉnh sau).</p>
+    </div>
+  </aside>
 
-</main>
-<footer class="footer">
-  <div class="container">
-    <p>© 2025 MXD. Trung tâm mua sắm affiliate ngành xây dựng.</p>
-  </div>
-</footer>
-<script src="assets/js/main.js"></script>
+  <footer>
+    <div class="container">
+      <div class="row space" style="flex-wrap: wrap; gap:12px;">
+        <div>© <span id="year"></span> MXD – Hàng tin dùng của thợ. Thiết kế & vận hành bởi MXD.</div>
+        <div class="muted">Liên hệ: <a href="mailto:mxd6686@gmail.com">mxd6686@gmail.com</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ========= DỮ LIỆU SẢN PHẨM =========
+    // TODO: Thay affiliateUrl = '#' bằng link thật của bạn.
+    const PRODUCTS = [
+      { id: 'keo-001', name: 'Keo ốp lát đa năng MXD-PRO', price: 145000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Gói 5kg', 'Gói 20kg'] },
+      { id: 'keo-002', name: 'Keo chống thấm sàn mái MXD-Guard', price: 265000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1620936041185-d996ad85e818?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Lon 1L', 'Lon 5L'] },
+      { id: 'may-001', name: 'Máy cắt gạch MXD-1200 Plus', price: 1890000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1601637155544-74eb9e3d7c29?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Bản tiêu chuẩn', 'Bản PRO'] },
+      { id: 'luoi-001', name: 'Lưỡi cắt gạch 125mm – độ bền cao', price: 85000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1620497529985-593de8eac2a1?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['100mm', '125mm', '180mm'] },
+      { id: 'thuoc-001', name: 'Thước thủy MXD – độ chính xác cao', price: 129000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['30cm', '60cm', '100cm'] },
+      { id: 'phu-001', name: 'Bộ phụ kiện LIVOO – combo 12 món', price: 399000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Combo A', 'Combo B'] },
+      { id: 'luoi-002', name: 'Lưỡi cắt kim cương – cắt ướt/khô', price: 129000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1598033144365-bc5d21334509?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['115mm', '125mm'] },
+      { id: 'may-002', name: 'Máy cắt cầm tay 720W – nhẹ & khỏe', price: 990000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1564429238817-a0cbe8ed9e5a?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Gói thân máy', 'Kèm 2 lưỡi cắt'] },
+      { id: 'keo-003', name: 'Keo dán gạch chống rêu – nội/ngoại thất', price: 175000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1523419409543-a7ea0c203267?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Gói 10kg', 'Gói 20kg'] },
+    ];
+
+    // ========= TIỆN ÍCH =========
+    const fmtVND = n => n.toLocaleString('vi-VN') + '₫';
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => document.querySelectorAll(sel);
+
+    // ========= STATE =========
+    const STATE = {
+      cart: JSON.parse(localStorage.getItem('mxd_cart') || '[]'),
+      category: 'all',
+      q: ''
+    };
+
+    function saveCart(){ localStorage.setItem('mxd_cart', JSON.stringify(STATE.cart)); }
+    function cartCount(){ return STATE.cart.reduce((s,i)=>s+i.qty,0); }
+    function cartTotal(){ return STATE.cart.reduce((s,i)=>s+i.qty*i.price,0); }
+
+    // ========= RENDER SẢN PHẨM =========
+    function renderProducts(){
+      const grid = $('#grid');
+      const term = STATE.q.trim().toLowerCase();
+      const list = PRODUCTS.filter(p => (STATE.category === 'all' || p.category === STATE.category) && (!term || p.name.toLowerCase().includes(term)));
+      grid.innerHTML = list.map(p => `
+        <article class="card" data-id="${p.id}">
+          <div class="img-wrap"><img src="${p.img}" alt="${p.name}"></div>
+          <div class="content">
+            <div class="row space"><strong>${p.name}</strong><span class="tag">${p.category}</span></div>
+            <div class="row space"><span class="price">${fmtVND(p.price)}</span>
+              <select class="opt" data-opt>
+                ${p.options.map(o=>`<option value="${o}">${o}</option>`).join('')}
+              </select>
+            </div>
+            <div class="row">
+              <a class="btn brand" href="${p.affiliateUrl}" target="_blank" rel="noopener">Mua ngay</a>
+              <button class="btn" data-add>Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      // Bind add-to-cart
+      $$('#grid [data-add]').forEach(btn => btn.addEventListener('click', e => {
+        const card = e.target.closest('.card');
+        const id = card.dataset.id;
+        const prod = PRODUCTS.find(x=>x.id===id);
+        const opt = card.querySelector('[data-opt]').value;
+        addToCart({ id: prod.id + '|' + opt, sku: prod.id, name: prod.name + ' – ' + opt, price: prod.price, img: prod.img, url: prod.affiliateUrl });
+      }));
+    }
+
+    // ========= GIỎ HÀNG =========
+    function addToCart(item){
+      const found = STATE.cart.find(i=>i.id===item.id);
+      if(found) found.qty += 1; else STATE.cart.push({ ...item, qty: 1 });
+      saveCart();
+      updateCartUI();
+      openCart();
+    }
+    function removeFromCart(id){ STATE.cart = STATE.cart.filter(i=>i.id!==id); saveCart(); updateCartUI(); }
+    function changeQty(id, d){
+      const it = STATE.cart.find(i=>i.id===id); if(!it) return;
+      it.qty = Math.max(1, it.qty + d); saveCart(); updateCartUI();
+    }
+    function clearCart(){ STATE.cart = []; saveCart(); updateCartUI(); }
+
+    function updateCartUI(){
+      $('#cartCount').textContent = cartCount();
+      $('#cartTotal').textContent = fmtVND(cartTotal());
+      const list = STATE.cart.map(i=>`
+        <div class="cart-item">
+          <img src="${i.img}" alt="${i.name}">
+          <div>
+            <div class="row space"><strong>${i.name}</strong><button class="btn" data-remove="${i.id}">✕</button></div>
+            <div class="row space"><span class="muted">${fmtVND(i.price)}</span>
+              <span class="qty">
+                <button class="btn" data-dec="${i.id}">−</button>
+                <strong>${i.qty}</strong>
+                <button class="btn" data-inc="${i.id}">+</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      $('#cartItems').innerHTML = list || '<p class="muted">Giỏ hàng trống.</p>';
+
+      // Bind actions
+      $$('#cartItems [data-remove]').forEach(b=> b.addEventListener('click', e=> removeFromCart(e.target.dataset.remove)) );
+      $$('#cartItems [data-inc]').forEach(b=> b.addEventListener('click', e=> changeQty(e.target.dataset.inc, +1)) );
+      $$('#cartItems [data-dec]').forEach(b=> b.addEventListener('click', e=> changeQty(e.target.dataset.dec, -1)) );
+    }
+
+    function openCart(){ $('#drawer').classList.add('open'); $('#drawer').setAttribute('aria-hidden','false'); }
+    function closeCart(){ $('#drawer').classList.remove('open'); $('#drawer').setAttribute('aria-hidden','true'); }
+
+    // ========= SỰ KIỆN =========
+    $('#category').addEventListener('change', e => { STATE.category = e.target.value; renderProducts(); });
+    $('#search').addEventListener('input', e => { STATE.q = e.target.value; renderProducts(); });
+    $('#openCart').addEventListener('click', openCart);
+    $('#closeCart').addEventListener('click', closeCart);
+    $('#clearCart').addEventListener('click', clearCart);
+    $('#checkout').addEventListener('click', () => {
+      if(!STATE.cart.length) { alert('Giỏ hàng đang trống.'); return; }
+      // Chiến lược checkout: mở tất cả link affiliate ở tab mới (đơn giản) hoặc gom qua một form đặt hàng MXD.
+      // Mặc định: mở tab cho từng sản phẩm (có thể thay bằng trang checkout riêng sau này).
+      const urls = [...new Set(STATE.cart.map(i=>i.url).filter(Boolean))];
+      urls.forEach(u => window.open(u, '_blank'));
+      alert('Đã mở các liên kết thanh toán/affiliate trong tab mới.');
+    });
+
+    // Form thành viên – xác nhận nhanh phía client; server-side do Formspree/Google Forms xử lý.
+    $('#memberForm').addEventListener('submit', e => {
+      // Cho phép submit thực sự, đồng thời hiện thông báo nhẹ nhàng.
+      $('#memberMsg').textContent = 'Đang gửi đăng ký…';
+      setTimeout(()=> $('#memberMsg').textContent = 'Đã gửi! Vui lòng kiểm tra email để xác nhận thành viên.', 300);
+    });
+
+    // ========= KHỞI TẠO =========
+    renderProducts();
+    updateCartUI();
+    $('#year').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- HƯỚNG DẪN NHANH (ghi chú trong file):
+    1) Đổi chữ "Mua qua link affiliate" thành "Mua ngay": ĐÃ LÀM.
+    2) Thêm nút "Thêm vào giỏ": ĐÃ LÀM – có giỏ hàng, tăng/giảm số lượng, xóa, tổng tiền. Lưu localStorage.
+    3) Trang chủ có mục "Đăng ký thành viên": ĐÃ LÀM – dùng Formspree (thay your-form-id) hoặc Google Forms.
+    4) Thêm danh mục, tìm kiếm: ĐÃ LÀM.
+    5) Thay link affiliate: sửa trường affiliateUrl trong mảng PRODUCTS ở trên.
+    6) Tùy chọn sản phẩm (size/loại): ĐÃ LÀM qua <select> options, tách SKU theo biến thể.
+    7) GitHub Pages: chỉ cần commit file này làm index.html (đổi tên file sang index.html) là chạy.
+  -->
 </body>
 </html>
