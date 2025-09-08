@@ -114,6 +114,17 @@
   </header>
 
   <main class="container">
+    <script>
+  // … ở trên đã khai báo PRODUCTS …
+  fetch('links.json')
+    .then(r => r.ok ? r.json() : {})
+    .then(map => {
+      PRODUCTS.forEach(p => { if (map[p.id]) p.affiliateUrl = map[p.id]; });
+      renderProducts();   // render sau khi đã map link
+    })
+    .catch(() => renderProducts()); // nếu không có links.json vẫn render bình thường
+</script>
+
     <!-- PRODUCTS -->
     <section id="products" class="section">
       <h2>Sản phẩm nổi bật</h2>
