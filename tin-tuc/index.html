@@ -170,6 +170,80 @@
   render(true);
 })();
 </script>
+<script>
+// MXD — Render bài viết từ /tin-tuc/posts.json (JS-only, dùng HTML sẵn có: #q, #cat, #list, #more)
+(async function () {
+  const $list = document.getElementById('list');
+  const $q    = document.getElementById('q');
+  const $cat  = document.getElementById('cat');
+  const $more = document.getElementById('more');
+
+  let posts = [];
+  try {
+    const res = await fetch('/tin-tuc/posts.json', { cache: 'no-store' });
+    posts = await res.json();
+  } catch (e) {
+    console.error(e);
+    if ($list) $list.innerHTML = '<p>Lỗi tải dữ liệu bài viết.</p>';
+    return;
+  }
+
+  // Build danh mục
+  const cats = [...new Set(posts.map(p => p.category).filter(Boolean))].sort();
+  if ($cat && $cat.options.length <= 1) {
+    for (const c of cats) {
+      const opt = document.createElement('option');
+      opt.value = c; opt.textContent = c;
+      $cat.appendChild(opt);
+    }
+  }
+
+  // Phân trang
+  let page = 1;
+  const PAGE_SIZE = 9;
+
+  const card = (p) => {
+    const dStr = new Date(p.date).toLocaleDateString('vi-VN');
+    const tags = (p.tags || []).map(t => `<span class="tag">#${t}</span>`).join(' ');
+    return `
+      <article class="post-card">
+        <a href="/tin-tuc/post.html?id=${encodeURIComponent(p.id)}" style="text-decoration:none;color:inherit">
+          <img src="${p.cover}" alt="${p.title}" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block;border-radius:8px"/>
+          <h3 style="margin:8px 0 4px;font-size:1.05rem">${p.title}</h3>
+          <p style="opacity:.9;margin:0 0 6px">${p.excerpt || ''}</p>
+          <div style="opacity:.8;font-size:.9rem;margin-bottom:6px">${dStr} · ${p.readingMins || 5} phút đọc</div>
+          <div style="display:flex;gap:.25rem;flex-wrap:wrap">${tags}</div>
+        </a>
+      </article>
+    `;
+  };
+
+  function filtered() {
+    const q = ($q?.value || '').toLowerCase().trim();
+    const c = $cat?.value || '';
+    return posts.filter(p => {
+      const hitCat = !c || p.category === c;
+      const hay = [p.title, p.excerpt, ...(p.tags || [])].join(' ').toLowerCase();
+      const hitQ = !q || hay.includes(q);
+      return hitCat && hitQ;
+    });
+  }
+
+  function render(reset = false) {
+    const data = filtered();
+    if (reset) page = 1;
+    const slice = data.slice(0, page * PAGE_SIZE);
+    $list.innerHTML = slice.map(card).join('') || '<p>Không có bài phù hợp.</p>';
+    if ($more) $more.style.display = slice.length < data.length ? '' : 'none';
+  }
+
+  $q?.addEventListener('input', () => render(true));
+  $cat?.addEventListener('change', () => render(true));
+  $more?.addEventListener('click', () => { page++; render(false); });
+
+  render(true);
+})();
+</script>
 <body>
   <nav class="nav">
     <div class="container nav-inner">
