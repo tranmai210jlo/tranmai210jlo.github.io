@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Chính sách đổi trả – MXD (Affiliate)</title>
+  <link rel="stylesheet" href="/assets/news.css?v=1">
+  <link rel="stylesheet" href="/assets/css/fab.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand">MXD</a>
+    <nav>
+      <a href="/">Trang chủ</a>
+      <a href="/tin-tuc/">Tin tức</a>
+      <a href="/store.html">Cửa hàng</a>
+      <a href="/chinh-sach/doi-tra.html" class="active">Chính sách</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" style="max-width:900px">
+  <h1>Chính sách đổi trả (tham chiếu)</h1>
+  <p class="muted">MXD là website tiếp thị liên kết (affiliate). Chúng tôi <b>không trực tiếp bán hàng, thu tiền, giao hàng</b> và <b>không xử lý đổi trả</b>. 
+  Việc đổi trả/hoàn tiền được thực hiện theo <b>chính sách của sàn/nhà bán</b> nơi bạn đặt mua.</p>
+
+  <h2>1) Vai trò của MXD</h2>
+  <ul>
+    <li>Gợi ý & dẫn link tới sản phẩm phù hợp công việc thi công.</li>
+    <li>Không quản lý tồn kho, giá bán, vận chuyển hay bảo hành.</li>
+    <li>Hỗ trợ bạn tra cứu đơn, liên hệ sàn/nhà bán khi cần.</li>
+  </ul>
+
+  <h2>2) Đổi trả áp dụng theo sàn/nhà bán</h2>
+  <p>Mỗi sàn/nhà bán có quy định riêng (thời hạn 3–15 ngày, tình trạng hàng, phí vận chuyển…). 
+  Hãy xem trang chính sách của nơi bạn mua:</p>
+  <ul>
+    <li><b>Shopee</b> – Trả hàng/Hoàn tiền</li>
+    <li><b>Lazada</b> – Chính sách đổi trả</li>
+    <li><b>Tiki</b> – Chính sách đổi trả</li>
+    <li><b>TikTok Shop</b> – Đổi trả/Hoàn tiền</li>
+  </ul>
+  <p class="muted">Mẹo: chúng tôi khuyến nghị bạn <b>không copy số ngày cố định</b> vì có thể thay đổi theo từng shop/sản phẩm. 
+  Thay vào đó, gắn <b>liên kết chính thức</b> của từng sàn (cập nhật định kỳ).</p>
+
+  <h2>3) Cách yêu cầu hỗ trợ</h2>
+  <ol>
+    <li>Vào ứng dụng/website nơi đặt mua → mục <b>Đơn hàng</b> → bấm <b>Yêu cầu đổi trả/hoàn tiền</b>.</li>
+    <li>Chuẩn bị bằng chứng: ảnh/video sản phẩm, hộp/tem, clip khui hàng (nếu có).</li>
+    <li>Nếu cần MXD hỗ trợ, gửi cho chúng tôi:
+      <ul>
+        <li>Mã đơn, link sản phẩm, ảnh/video lỗi.</li>
+        <li>Ảnh màn hình cuộc trao đổi với nhà bán/sàn (nếu đã có).</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h2>4) MXD sẽ làm gì cho bạn?</h2>
+  <ul>
+    <li>Kiểm tra link affiliate, đối chiếu sản phẩm & cửa hàng.</li>
+    <li>Hướng dẫn quy trình khiếu nại đúng kênh của sàn.</li>
+    <li><b>Sửa/ghi chú lại link</b> nếu phát hiện liên kết hết hạn hoặc trỏ sai danh mục.</li>
+  </ul>
+
+  <h2>5) Lưu ý & miễn trừ</h2>
+  <ul>
+    <li>Quyết định cuối cùng về đổi trả/hoàn tiền thuộc về <b>sàn/nhà bán</b>.</li>
+    <li>Bảo hành/đổi mới là trách nhiệm của <b>nhà sản xuất/nhà bán</b>.</li>
+    <li>MXD có thể nhận hoa hồng khi bạn mua qua liên kết của chúng tôi; <b>giá bạn trả không đổi</b>.</li>
+    <li>Chúng tôi dùng cookie để đo lường hiệu quả liên kết theo quy định hiện hành.</li>
+  </ul>
+
+  <p class="muted">Tuyên bố miễn trừ: Nội dung trang này chỉ nhằm mục đích thông tin, không phải tư vấn pháp lý.</p>
+</main>
+
+<!-- FAB -->
+<div id="inject-fab"></div>
+<script>
+(function () {
+  const m = document.getElementById('inject-fab'); if(!m) return;
+  fetch('/assets/partials/fab.html', {cache:'no-store'})
+    .then(r=>r.ok?r.text():Promise.reject())
+    .then(html=>{
+      m.outerHTML = html;
+      const homeBtn = document.querySelector('.mxdfab__btn.is-home');
+      const onScroll = () => homeBtn && homeBtn.classList.toggle('show', window.scrollY>180);
+      onScroll(); window.addEventListener('scroll', onScroll);
+    });
+})();
+</script>
+
+</body>
+</html>
