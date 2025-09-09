@@ -1084,10 +1084,11 @@ Máy cắt, https://..."></textarea>
   @media (max-width: 480px){ .fab-btn span{ display: none; } }
 /* Nút nổi về Trang chủ */
 .home-fab{
-  position:fixed; right:16px; bottom:82px; /* cao hơn contact-fab */
-  z-index:990;
+  position:fixed; right:16px; bottom:170px; /* nhấc lên trên cụm liên hệ */
+  z-index:10050; /* cao hơn contact-fab (9999) */
   transition:.2s; transform:translateY(12px); opacity:0; pointer-events:none;
 }
+
 .home-fab.show{ transform:translateY(0); opacity:1; pointer-events:auto; }
 .home-fab a{
   display:inline-flex; align-items:center; gap:8px;
