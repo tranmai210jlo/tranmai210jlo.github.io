@@ -1,25 +1,18 @@
-<!doctype html><html lang="vi"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Tin tức & Kinh nghiệm MXD</title>
-<link rel="stylesheet" href="/assets/news.css?v=1">
-</head><link rel="stylesheet" href="/assets/css/fab.css">
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Tin tức & Kinh nghiệm MXD</title>
 
-<!-- Vị trí sẽ chèn cụm nút -->
-<div id="inject-fab"></div>
+  <!-- CSS trang tin tức -->
+  <link rel="stylesheet" href="/assets/news.css?v=1">
+  <!-- CSS nút nổi -->
+  <link rel="stylesheet" href="/assets/css/fab.css">
+</head>
+<body>
 
-<script>
-  (function () {
-    const mount = document.getElementById('inject-fab');
-    if (!mount) return;
-    fetch('/partials/fab.html').then(r => r.text()).then(html => {
-      mount.outerHTML = html;                     // chèn cụm nút
-      const homeBtn = document.querySelector('.mxdfab__btn.is-home');
-      const toggle = () => homeBtn && homeBtn.classList.toggle('show', window.scrollY > 180);
-      toggle(); window.addEventListener('scroll', toggle);
-    });
-  })();
-</script>
-<body><header class="nav">
+<header class="nav">
   <div class="nav-inner">
     <a href="/" class="brand">MXD</a>
     <nav>
@@ -34,51 +27,124 @@
   <h1>Tin tức & Kinh nghiệm</h1>
   <div class="controls">
     <input id="q" type="search" placeholder="Tìm bài viết, từ khóa…"/>
-    <select id="cat" aria-label="Lọc theo danh mục"><option value="">Tất cả danh mục</option></select>
+    <select id="cat" aria-label="Lọc theo danh mục">
+      <option value="">Tất cả danh mục</option>
+    </select>
   </div>
+
   <div id="list" class="grid"></div>
   <div style="text-align:center"><button id="more" class="btn">Xem thêm</button></div>
 </main>
 
+<!-- MXD — nạp /tin-tuc/posts.json + lọc -->
 <script>
-// MXD — nạp /tin-tuc/posts.json + lọc
 (async function(){
-  const $list=document.getElementById('list'),$q=document.getElementById('q'),$cat=document.getElementById('cat'),$more=document.getElementById('more');
-  const catNorm=v=>{const raw=(v||'').trim().toLowerCase();return(!raw||raw.includes('tất cả'))?'':v;};
+  const $list = document.getElementById('list'),
+        $q    = document.getElementById('q'),
+        $cat  = document.getElementById('cat'),
+        $more = document.getElementById('more');
 
-  let posts=[];
-  try{
-    const res=await fetch('/tin-tuc/posts.json',{cache:'no-store'});
-    if(!res.ok)throw new Error('HTTP '+res.status);
-    posts=await res.json();
-  }catch(e){
-    console.error('posts.json error',e);
-    $list.innerHTML='<p class="muted">Không đọc được <code>tin-tuc/posts.json</code>.</p>'; $more.style.display='none'; return;
+  const catNorm = v => {
+    const raw = (v||'').trim().toLowerCase();
+    return (!raw || raw.includes('tất cả')) ? '' : v;
+  };
+
+  let posts = [];
+  try {
+    const res = await fetch('/tin-tuc/posts.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    posts = await res.json();
+  } catch (e) {
+    console.error('posts.json error', e);
+    $list.innerHTML = '<p class="muted">Không đọc được <code>tin-tuc/posts.json</code>.</p>';
+    $more.style.display = 'none';
+    return;
   }
-  if(!Array.isArray(posts)||!posts.length){$list.innerHTML='<p class="muted">Chưa có bài trong <code>posts.json</code>.</p>'; $more.style.display='none'; return;}
+
+  if (!Array.isArray(posts) || !posts.length) {
+    $list.innerHTML = '<p class="muted">Chưa có bài trong <code>posts.json</code>.</p>';
+    $more.style.display = 'none';
+    return;
+  }
 
   // build danh mục
-  const cats=[...new Set(posts.map(p=>p.category).filter(Boolean))].sort();
-  for(const c of cats){const o=document.createElement('option');o.value=c;o.textContent=c;$cat.appendChild(o);} $cat.value='';
+  const cats = [...new Set(posts.map(p => p.category).filter(Boolean))].sort();
+  for (const c of cats) {
+    const o = document.createElement('option');
+    o.value = c; o.textContent = c;
+    $cat.appendChild(o);
+  }
+  $cat.value = '';
 
   // phân trang + render
-  let page=1; const PAGE_SIZE=9;
-  const card=p=>{const d=new Date(p.date).toLocaleDateString('vi-VN');const tags=(p.tags||[]).map(t=>`<span class="tag">#${t}</span>`).join(' ');
-    return `<article class="post-card">
-      <a href="/tin-tuc/post.html?id=${encodeURIComponent(p.id)}">
-        <img src="${p.cover||''}" alt="${p.title}" loading="lazy"/>
-        <div style="padding:12px"><h3>${p.title}</h3><p>${p.excerpt||''}</p>
-        <div class="meta">${d} · ${p.readingMins||5} phút đọc</div><div class="tags">${tags}</div></div>
-      </a></article>`};
-  const filtered=()=>{const q=($q.value||'').toLowerCase().trim(),c=catNorm($cat.value||'');
-    return posts.filter(p=>{const hitCat=!c||p.category===c;const hay=[p.title,p.excerpt,...(p.tags||[])].join(' ').toLowerCase();return hitCat&&(!q||hay.includes(q));});};
-  function render(reset=false){const data=filtered(); if(reset)page=1; const slice=data.slice(0,page*PAGE_SIZE);
-    $list.innerHTML= slice.length? slice.map(card).join('') : '<p>Không có bài phù hợp.</p>';
-    $more.style.display= slice.length<data.length ? '' : 'none';
+  let page = 1; const PAGE_SIZE = 9;
+
+  const card = p => {
+    const d = new Date(p.date).toLocaleDateString('vi-VN');
+    const tags = (p.tags||[]).map(t => `<span class="tag">#${t}</span>`).join(' ');
+    return `
+      <article class="post-card">
+        <a href="/tin-tuc/post.html?id=${encodeURIComponent(p.id)}">
+          <img src="${p.cover||''}" alt="${p.title}" loading="lazy"/>
+          <div style="padding:12px">
+            <h3>${p.title}</h3>
+            <p>${p.excerpt||''}</p>
+            <div class="meta">${d} · ${p.readingMins||5} phút đọc</div>
+            <div class="tags">${tags}</div>
+          </div>
+        </a>
+      </article>`;
+  };
+
+  const filtered = () => {
+    const q = ($q.value||'').toLowerCase().trim();
+    const c = catNorm($cat.value||'');
+    return posts.filter(p => {
+      const hitCat = !c || p.category === c;
+      const hay = [p.title, p.excerpt, ...(p.tags||[])].join(' ').toLowerCase();
+      return hitCat && (!q || hay.includes(q));
+    });
+  };
+
+  function render(reset=false){
+    const data = filtered();
+    if (reset) page = 1;
+    const slice = data.slice(0, page * PAGE_SIZE);
+    $list.innerHTML = slice.length ? slice.map(card).join('') : '<p>Không có bài phù hợp.</p>';
+    $more.style.display = (slice.length < data.length) ? '' : 'none';
   }
-  $q.addEventListener('input',()=>render(true)); $cat.addEventListener('change',()=>render(true)); $more.addEventListener('click',()=>{page++;render(false);});
+
+  $q.addEventListener('input',  () => render(true));
+  $cat.addEventListener('change', () => render(true));
+  $more.addEventListener('click', () => { page++; render(false); });
+
   render(true);
 })();
-</script> <a href="/" class="fab" title="Về Trang chủ">Trang chủ</a>
+</script>
 
-</body></html>
+<!-- Vị trí sẽ chèn cụm nút -->
+<div id="inject-fab"></div>
+
+<!-- Chèn FAB: thử /partials trước, nếu 404 thì thử /assets/partials -->
+<script>
+(function () {
+  const mount = document.getElementById('inject-fab');
+  if (!mount) return;
+
+  const tryFetch = (url) =>
+    fetch(url, { cache: 'no-store' }).then(r => r.ok ? r.text() : Promise.reject(url));
+
+  tryFetch('/partials/fab.html')
+    .catch(() => tryFetch('/assets/partials/fab.html'))
+    .then(html => {
+      mount.outerHTML = html;                     // chèn cụm nút
+      const homeBtn = document.querySelector('.mxdfab__btn.is-home');
+      const onScroll = () => homeBtn && homeBtn.classList.toggle('show', window.scrollY > 180);
+      onScroll(); window.addEventListener('scroll', onScroll);
+    })
+    .catch((u) => console.warn('Không tìm thấy fab.html ở:', u));
+})();
+</script>
+
+</body>
+</html>
