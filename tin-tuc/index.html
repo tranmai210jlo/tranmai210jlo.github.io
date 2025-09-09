@@ -97,217 +97,48 @@
 <meta name="twitter:image" content="https://tranmai210jlo.github.io/assets/og-home.jpg">
 </head>
 <script>
-// MXD — Render bài viết từ /tin-tuc/posts.json (JS-only, dùng HTML sẵn có: #q, #cat, #list, #more)
-(async function () {
-  const $list = document.getElementById('list');
-  const $q    = document.getElementById('q');     // ô tìm kiếm
-  const $cat  = document.getElementById('cat');   // dropdown danh mục
-  const $more = document.getElementById('more');  // nút Xem thêm
-
-  let posts = [];
-  try {
-    const res = await fetch('/tin-tuc/posts.json', { cache: 'no-store' });
-    posts = await res.json();
-  } catch (e) {
-    console.error(e);
-    if ($list) $list.innerHTML = '<p>Lỗi tải dữ liệu bài viết.</p>';
-    return;
-  }
-
-  // Build danh mục từ dữ liệu
-  const cats = [...new Set(posts.map(p => p.category).filter(Boolean))].sort();
-  if ($cat && $cat.options.length <= 1) {
-    for (const c of cats) {
-      const opt = document.createElement('option');
-      opt.value = c; opt.textContent = c;
-      $cat.appendChild(opt);
-    }
-  }
-
-  // Phân trang nhẹ
-  let page = 1;
-  const PAGE_SIZE = 9;
-
-  const card = (p) => {
-    const dStr = new Date(p.date).toLocaleDateString('vi-VN');
-    const tags = (p.tags || []).map(t => `<span class="tag">#${t}</span>`).join(' ');
-    return `
-      <article class="post-card">
-        <a href="/tin-tuc/post.html?id=${encodeURIComponent(p.id)}" style="text-decoration:none;color:inherit">
-          <img src="${p.cover}" alt="${p.title}" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block;border-radius:8px"/>
-          <h3 style="margin:8px 0 4px;font-size:1.05rem">${p.title}</h3>
-          <p style="opacity:.9;margin:0 0 6px">${p.excerpt || ''}</p>
-          <div style="opacity:.8;font-size:.9rem;margin-bottom:6px">${dStr} · ${p.readingMins || 5} phút đọc</div>
-          <div style="display:flex;gap:.25rem;flex-wrap:wrap">${tags}</div>
-        </a>
-      </article>
-    `;
-  };
-
-  function filtered() {
-    const q = ($q?.value || '').toLowerCase().trim();
-    const c = $cat?.value || '';
-    return posts.filter(p => {
-      const hitCat = !c || p.category === c;
-      const hay = [p.title, p.excerpt, ...(p.tags || [])].join(' ').toLowerCase();
-      const hitQ = !q || hay.includes(q);
-      return hitCat && hitQ;
-    });
-  }
-
-  function render(reset = false) {
-    const data = filtered();
-    if (reset) page = 1;
-    const slice = data.slice(0, page * PAGE_SIZE);
-    $list.innerHTML = slice.map(card).join('') || '<p>Không có bài phù hợp.</p>';
-    if ($more) $more.style.display = slice.length < data.length ? '' : 'none';
-  }
-
-  $q?.addEventListener('input', () => render(true));
-  $cat?.addEventListener('change', () => render(true));
-  $more?.addEventListener('click', () => { page++; render(false); });
-
-  render(true);
-})();
-</script>
-<script>
-// MXD — Render bài viết từ /tin-tuc/posts.json (JS-only, dùng HTML sẵn có: #q, #cat, #list, #more)
+// MXD — Tin tức: nạp /tin-tuc/posts.json + lọc danh mục/tìm kiếm
 (async function () {
   const $list = document.getElementById('list');
   const $q    = document.getElementById('q');
   const $cat  = document.getElementById('cat');
   const $more = document.getElementById('more');
 
-  let posts = [];
-  try {
-    const res = await fetch('/tin-tuc/posts.json', { cache: 'no-store' });
-    posts = await res.json();
-  } catch (e) {
-    console.error(e);
-    if ($list) $list.innerHTML = '<p>Lỗi tải dữ liệu bài viết.</p>';
-    return;
-  }
-
-  // Build danh mục
-  const cats = [...new Set(posts.map(p => p.category).filter(Boolean))].sort();
-  if ($cat && $cat.options.length <= 1) {
-    for (const c of cats) {
-      const opt = document.createElement('option');
-      opt.value = c; opt.textContent = c;
-      $cat.appendChild(opt);
-    }
-  }
-
-  // Phân trang
-  let page = 1;
-  const PAGE_SIZE = 9;
-
-  const card = (p) => {
-    const dStr = new Date(p.date).toLocaleDateString('vi-VN');
-    const tags = (p.tags || []).map(t => `<span class="tag">#${t}</span>`).join(' ');
-    return `
-      <article class="post-card">
-        <a href="/tin-tuc/post.html?id=${encodeURIComponent(p.id)}" style="text-decoration:none;color:inherit">
-          <img src="${p.cover}" alt="${p.title}" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block;border-radius:8px"/>
-          <h3 style="margin:8px 0 4px;font-size:1.05rem">${p.title}</h3>
-          <p style="opacity:.9;margin:0 0 6px">${p.excerpt || ''}</p>
-          <div style="opacity:.8;font-size:.9rem;margin-bottom:6px">${dStr} · ${p.readingMins || 5} phút đọc</div>
-          <div style="display:flex;gap:.25rem;flex-wrap:wrap">${tags}</div>
-        </a>
-      </article>
-    `;
+  const catNorm = v => {
+    const raw = (v||'').trim().toLowerCase();
+    return (!raw || raw.includes('tất cả')) ? '' : v;
   };
 
-  function filtered() {
-    const q = ($q?.value || '').toLowerCase().trim();
-    const c = $cat?.value || '';
-    return posts.filter(p => {
-      const hitCat = !c || p.category === c;
-      const hay = [p.title, p.excerpt, ...(p.tags || [])].join(' ').toLowerCase();
-      const hitQ = !q || hay.includes(q);
-      return hitCat && hitQ;
-    });
-  }
-
-  function render(reset = false) {
-    const data = filtered();
-    if (reset) page = 1;
-    const slice = data.slice(0, page * PAGE_SIZE);
-    $list.innerHTML = slice.map(card).join('') || '<p>Không có bài phù hợp.</p>';
-    if ($more) $more.style.display = slice.length < data.length ? '' : 'none';
-  }
-
-  $q?.addEventListener('input', () => render(true));
-  $cat?.addEventListener('change', () => render(true));
-  $more?.addEventListener('click', () => { page++; render(false); });
-
-  render(true);
-})();
-</script>
-<body>
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a class="brand" href="/"><div class="logo">M</div><div>MXD • Tin tức & Kinh nghiệm</div></a>
-      <div style="display:flex;gap:10px;align-items:center">
-        <a class="pill" href="/">Trang chủ</a>
-        <a class="pill" href="/index.html#products">Cửa hàng</a>
-      </div>
-    </div>
-  </nav>
-
-  <header class="hero container">
-    <h1>Tin tức & Kinh nghiệm thi công</h1>
-    <p class="muted">Mẹo thi công, bảng giá, quy định pháp lý, chọn vật tư thông minh – gói gọn, dễ tra cứu.</p>
-    <div class="filters">
-      <input id="q" type="text" placeholder="Tìm bài viết, từ khóa…">
-      <select id="cat" aria-label="Lọc theo danh mục"><option>Tất cả danh mục</option></select>
-    </div>
-  </header>
-
-  <main class="container">
-    <section id="list" class="grid" aria-live="polite"></section>
-    <div class="load"><button id="more" class="btn">Xem thêm</button></div>
-  </main>
-
-  <footer>
-    <div class="container">© <span id="year"></span> MXD – Hàng tin dùng của thợ.</div>
-  </footer>
-
-  <!-- FAB Trang chủ -->
-  <div id="homeFab" class="home-fab"><a href="/">🏠 Trang chủ</a></div>
-
-  <script>
-// MXD — Render bài viết từ /tin-tuc/posts.json (JS-only, dùng HTML sẵn có: #q, #cat, #list, #more)
-(async function () {
-  const $list = document.getElementById('list');
-  const $q    = document.getElementById('q');
-  const $cat  = document.getElementById('cat');
-  const $more = document.getElementById('more');
-
   let posts = [];
   try {
     const res = await fetch('/tin-tuc/posts.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('posts.json HTTP ' + res.status);
     posts = await res.json();
   } catch (e) {
     console.error(e);
-    if ($list) $list.innerHTML = '<p>Lỗi tải dữ liệu bài viết.</p>';
+    $list.innerHTML = '<p style="opacity:.9">Không đọc được <code>tin-tuc/posts.json</code>.</p>';
     return;
   }
 
-  // Cập nhật năm footer nếu có <span id="year"></span>
   document.getElementById('year')?.textContent = new Date().getFullYear();
 
-  // Build danh mục
-  const cats = [...new Set(posts.map(p => p.category).filter(Boolean))].sort();
   if ($cat && $cat.options.length <= 1) {
+    if ($cat.options.length === 0) {
+      const optAll = document.createElement('option');
+      optAll.value = ''; optAll.textContent = 'Tất cả danh mục';
+      $cat.appendChild(optAll);
+    } else if ($cat.options[0].textContent.toLowerCase().includes('tất cả')) {
+      $cat.options[0].value = '';
+    }
+    const cats = [...new Set(posts.map(p => p.category).filter(Boolean))].sort();
     for (const c of cats) {
       const opt = document.createElement('option');
       opt.value = c; opt.textContent = c;
       $cat.appendChild(opt);
     }
+    $cat.value = '';
   }
 
-  // Phân trang nhẹ
   let page = 1;
   const PAGE_SIZE = 9;
 
@@ -315,36 +146,37 @@
     const dStr = new Date(p.date).toLocaleDateString('vi-VN');
     const tags = (p.tags || []).map(t => `<span class="tag">#${t}</span>`).join(' ');
     return `
-      <article class="post-card">
+      <article class="post-card" style="border:1px solid #2223;border-radius:12px;overflow:hidden;background:#111;box-shadow:0 2px 6px #0006">
         <a href="/tin-tuc/post.html?id=${encodeURIComponent(p.id)}" style="text-decoration:none;color:inherit">
-          <img src="${p.cover}" alt="${p.title}" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block;border-radius:8px"/>
-          <h3 style="margin:8px 0 4px;font-size:1.05rem">${p.title}</h3>
-          <p style="opacity:.9;margin:0 0 6px">${p.excerpt || ''}</p>
-          <div style="opacity:.8;font-size:.9rem;margin-bottom:6px">${dStr} · ${p.readingMins || 5} phút đọc</div>
-          <div style="display:flex;gap:.25rem;flex-wrap:wrap">${tags}</div>
+          <img src="${p.cover||''}" alt="${p.title}" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block"/>
+          <div style="padding:12px">
+            <h3 style="margin:0 0 4px;font-size:1.05rem">${p.title}</h3>
+            <p style="opacity:.9;margin:.25rem 0">${p.excerpt||''}</p>
+            <div style="opacity:.8;font-size:.9rem;margin-bottom:6px">${dStr} · ${p.readingMins||5} phút đọc</div>
+            <div style="display:flex;gap:.25rem;flex-wrap:wrap">${tags}</div>
+          </div>
         </a>
-      </article>
-    `;
+      </article>`;
   };
 
-  function filtered() {
+  const filtered = () => {
     const q = ($q?.value || '').toLowerCase().trim();
-    const rawCat = ($cat?.value || '').trim();
-const c = (!rawCat || rawCat.toLowerCase().includes('tất cả')) ? '' : rawCat;
-
+    const c = catNorm($cat?.value || '');
     return posts.filter(p => {
       const hitCat = !c || p.category === c;
-      const hay = [p.title, p.excerpt, ...(p.tags || [])].join(' ').toLowerCase();
+      const hay = [p.title, p.excerpt, ...(p.tags||[])].join(' ').toLowerCase();
       const hitQ = !q || hay.includes(q);
       return hitCat && hitQ;
     });
-  }
+  };
 
-  function render(reset = false) {
+  function render(reset=false) {
     const data = filtered();
     if (reset) page = 1;
     const slice = data.slice(0, page * PAGE_SIZE);
-    $list.innerHTML = slice.map(card).join('') || '<p>Không có bài phù hợp.</p>';
+    $list.innerHTML = slice.length
+      ? slice.map(card).join('')
+      : '<p>Không có bài phù hợp.</p>';
     if ($more) $more.style.display = slice.length < data.length ? '' : 'none';
   }
 
