@@ -1,1 +1,15 @@
+{
+  "SKU-KEO-001": {
+    "name": "Keo dán gạch XYZ 20kg",
+    "network": "Shopee",
+    "url": "https://shopee.vn/product/123456",
+    "params": { "aff_sub": "{SUBID}", "utm_term": "keo-op-lat" }
+  },
+  "SKU-MAYCAT-125": {
+    "name": "Máy cắt gạch 125mm ABC",
+    "network": "Lazada",
+    "url": "https://www.lazada.vn/products/abc-125mm",
+    "params": { "sub_id": "{SUBID}", "utm_term": "may-cat-gach" }
+  }
+}
 
