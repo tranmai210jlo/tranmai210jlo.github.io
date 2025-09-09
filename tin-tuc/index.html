@@ -25,7 +25,6 @@
 
 <main class="wrap">
   <h1>Tin tức & Kinh nghiệm</h1>
-
   <div class="controls">
     <input id="q" type="search" placeholder="Tìm bài viết, từ khóa…"/>
     <select id="cat" aria-label="Lọc theo danh mục">
@@ -130,7 +129,6 @@
   const mount = document.getElementById('inject-fab');
   if (!mount) return;
 
-  // GỌI ĐÚNG FILE đang lưu ở /assets/partials/fab.html
   fetch('/assets/partials/fab.html', { cache: 'no-store' })
     .then(r => r.ok ? r.text() : Promise.reject(new Error('fab 404')))
     .then(html => {
