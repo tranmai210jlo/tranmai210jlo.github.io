@@ -2,7 +2,17 @@
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Tin tức & Kinh nghiệm MXD</title>
 <link rel="stylesheet" href="/assets/news.css?v=1">
-</head><body>
+</head><body><header class="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand">MXD</a>
+    <nav>
+      <a href="/" class="active">Trang chủ</a>
+      <a href="/tin-tuc/">Tin tức</a>
+      <a href="/store.html">Cửa hàng</a>
+    </nav>
+  </div>
+</header>
+
 <main class="wrap">
   <h1>Tin tức & Kinh nghiệm</h1>
   <div class="controls">
@@ -52,5 +62,6 @@
   $q.addEventListener('input',()=>render(true)); $cat.addEventListener('change',()=>render(true)); $more.addEventListener('click',()=>{page++;render(false);});
   render(true);
 })();
-</script>
+</script> <a href="/" class="fab" title="Về Trang chủ">Trang chủ</a>
+
 </body></html>
