@@ -1,635 +1,579 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head><link rel="stylesheet" href="/assets/news.css?v=1">
-
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MXD – Cửa hàng Affiliate & Thi công</title>
-  <meta name="description" content="MXD – Trung tâm mua sắm dụng cụ thi công & vật tư xây dựng. Bán hàng qua link affiliate và nhận thi công trực tiếp." />
-  <style>color-scheme: dark; /* ép control mặc định (select, input…) dùng giao diện tối */
-/* Dropdown tối màu cho toàn site */
-select, .opt{
-  -webkit-appearance:none; -moz-appearance:none; appearance:none;
-  background-color: rgba(255,255,255,.06);
-  color: var(--text);
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 12px;
-  padding: 12px 42px 12px 14px;  /* chừa chỗ mũi tên */
-  /* mũi tên SVG nhỏ, màu muted */
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path fill="%2393a4b7" d="M0 0l6 8 6-8z"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-}
-select option, select optgroup{
-  background-color: #0b0f14;  /* nền danh sách khi bung */
-  color: var(--text);
-}
-select:focus{
-  outline: none;
-  border-color: rgba(96,165,250,.6);
-  box-shadow: 0 0 0 3px rgba(96,165,250,.2);
-}
-/* iOS tránh zoom khi chạm select */
-@media (max-width: 480px){ select{ font-size:16px; } }
+  <title>MXD – Dụng cụ thi công & Vật tư tin dùng</title>
+  <meta name="description" content="MXD – Trung tâm tiếp thị liên kết ngành xây dựng: dụng cụ thi công, keo, máy móc. Hàng thợ tin dùng, so sánh nhanh, mua qua sàn uy tín." />
+  <link rel="canonical" href="https://tranmai210jlo.github.io/" />
+  
+  <!-- Open Graph / Twitter Card -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tranmai210jlo.github.io/">
+  <meta property="og:title" content="MXD – Dụng cụ thi công & Vật tư tin dùng">
+  <meta property="og:description" content="Trung tâm tiếp thị liên kết ngành xây dựng: dụng cụ thi công, keo, máy móc. Hàng thợ tin dùng.">
+  <meta property="og:image" content="/assets/og-home.jpg">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MXD – Dụng cụ thi công & Vật tư tin dùng" />
+  <meta name="twitter:description" content="Trung tâm tiếp thị liên kết ngành xây dựng: dụng cụ thi công, keo, máy móc. Hàng thợ tin dùng." />
+  <meta name="twitter:image" content="/assets/og-home.jpg" />
 
-    :root {
-      --bg: #0b0f14;
-      --card: #121821;
-      --muted: #93a4b7;
-      --text: #eaf2ff;
-      --brand: #5eead4; /* xanh ngọc */
-      --brand-2: #60a5fa; /* xanh dương */
-      --warn: #f59e0b;
-      --danger: #ef4444;
-      --success: #22c55e;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 16px;
+  <style>
+    :root{
+      --bg:#0b1220; --card:#0f172a; --muted:#94a3b8; --text:#e5e7eb; --brand:#22d3ee; --brand2:#60a5fa;
+      --ok:#22c55e; --warn:#f59e0b; --danger:#ef4444; --border:#1f2a44; --chip:#0b213a;
     }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background: radial-gradient(1200px 600px at top right, #0d1520, #0b0f14 40%), var(--bg); color: var(--text); }
-    a { color: inherit; text-decoration: none; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:1200px;margin:0 auto;padding:0 16px}
 
-    /* NAV */
-    .nav { position: sticky; top: 0; z-index: 50; background: rgba(11,15,20,.7); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,255,255,.06); }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .5px; }
-    .logo { height: 34px; width: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); display: grid; place-items: center; color: #001218; font-weight: 900; box-shadow: var(--shadow); }
-    .nav-links { display: flex; align-items: center; gap: 16px; }
-    .pill { padding: 10px 14px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); color: var(--text); transition: .2s; }
-    .pill:hover { transform: translateY(-1px); background: rgba(255,255,255,.08); }
+    /* Header */
+    header{position:sticky;top:0;z-index:50;background:rgba(11,18,32,.8);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--border)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.5px}
+    .logo-badge{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;font-weight:800;color:#001018}
+    .menu{display:flex;gap:14px;flex-wrap:wrap}
+    .menu a{padding:8px 10px;border-radius:8px;color:var(--muted)}
+    .menu a:hover{background:#0e1b2f;color:var(--text)}
+    .cta{display:flex;gap:10px}
+    .btn{border:1px solid var(--border);background:#0d1a30;color:var(--text);padding:10px 14px;border-radius:12px}
+    .btn:hover{border-color:#29456d}
+    .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#03131a;border:none}
 
-    /* HERO */
-    .hero { padding: 52px 0 28px; text-align: center; }
-    .hero h1 { font-size: clamp(28px, 4vw, 44px); margin: 0 0 8px; }
-    .hero p { color: var(--muted); margin: 0 auto 22px; max-width: 760px; }
-    .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn { padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,.08); background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); color: var(--text); box-shadow: var(--shadow); cursor: pointer; transition: .2s; font-weight: 600; }
-    .btn:hover { transform: translateY(-1px); }
-    .btn.brand { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #001218; border: none; }
+    /* Hero */
+    .hero{padding:56px 0;background:radial-gradient(60% 60% at 50% 0%, #0f2746 0%, transparent 60%)}
+    .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}
+    .hero h1{margin:0 0 8px;font-size:clamp(28px,5vw,42px)}
+    .hero p{color:var(--muted);margin:0 0 16px}
+    .hero .card{background:linear-gradient(180deg,#0b1a2d,#0c1221);border:1px solid var(--border);border-radius:16px;padding:18px}
 
-    /* GRID */
-    .section { padding: 24px 0 52px; }
-    .section h2 { margin: 0 0 14px; font-size: 24px; letter-spacing: .2px; }
-    .muted { color: var(--muted); }
+    /* Chips */
+    .chips{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{background:var(--chip);border:1px solid var(--border);padding:6px 10px;border-radius:999px;color:#cbd5e1;font-size:13px}
 
-    .filters { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
-    .search { flex: 1; min-width: 220px; }
-    input[type="text"], input[type="email"], input[type="tel"], input[type="password"], select, textarea {
-      width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.04); color: var(--text);
-    }
+    /* Section title */
+    .section{padding:32px 0}
+    .section h2{margin:0 0 8px;font-size:clamp(22px,4vw,28px)}
+    .section p.lead{margin:0 0 18px;color:var(--muted)}
 
-    .grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 16px; }
-    @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr);} }
-    @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr);} }
+    /* Filters */
+    .filters{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 20px}
+    .input, select{background:#0e1930;border:1px solid var(--border);color:var(--text);border-radius:10px;padding:10px 12px}
+    .input::placeholder{color:#8da0bf}
 
-    .card { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; }
-    .card .img-wrap { aspect-ratio: 16/10; background: #0f1621; overflow: hidden; }
-    .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .card .content { padding: 14px; display: grid; gap: 8px; }
-    .price { font-weight: 800; color: var(--brand); }
-    .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-    .row.space { justify-content: space-between; }
-    .tag { font-size: 12px; padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,.1); color: var(--muted); }
-    .opt { min-width: 140px; }
+    /* Grid products */
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    @media (max-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:420px){.grid{grid-template-columns:1fr}}
 
-    /* CART */
-    .cart-btn { position: relative; }
-    .badge { position: absolute; top: -6px; right: -8px; background: var(--warn); color: #001218; font-weight: 800; border-radius: 999px; font-size: 12px; padding: 3px 6px; }
-    .drawer { position: fixed; right: 0; top: 0; height: 100vh; width: min(420px, 92vw); background: #0e141c; border-left: 1px solid rgba(255,255,255,.08); box-shadow: var(--shadow); transform: translateX(110%); transition: transform .22s ease; z-index: 70; display: flex; flex-direction: column; }
-    .drawer.open { transform: translateX(0); }
-    .drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 16px; border-bottom: 1px solid rgba(255,255,255,.08); }
-    .drawer-body { padding: 12px 16px; overflow: auto; display: grid; gap: 12px; }
-    .cart-item { display: grid; grid-template-columns: 72px 1fr; gap: 12px; align-items: center; border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 10px; }
-    .cart-item img { width: 72px; height: 72px; object-fit: cover; border-radius: 8px; }
-    .qty { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,.08); border-radius: 999px; padding: 6px 10px; }
-    .drawer-footer { margin-top: auto; padding: 14px 16px; border-top: 1px solid rgba(255,255,255,.08); display: grid; gap: 8px; }
+    .card{background:linear-gradient(180deg,#0b1220,#0f172a);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+    .card .thumb{aspect-ratio:4/3;background:#0c213a;display:grid;place-items:center}
+    .card .body{padding:12px 12px 14px;display:grid;gap:8px}
+    .title{font-weight:600}
+    .price{display:flex;align-items:baseline;gap:8px}
+    .price .now{font-weight:800}
+    .price .old{color:#93a0b8;text-decoration:line-through}
+    .tags{display:flex;gap:6px;flex-wrap:wrap}
+    .tag{font-size:11px;background:#0b213a;border:1px solid var(--border);color:#c4d3ea;padding:4px 8px;border-radius:999px}
+    .actions{display:flex;gap:8px}
+    .btn-sm{padding:8px 10px;border-radius:10px}
 
-    /* FORM – MEMBERSHIP */
-    .form { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+    /* Drawer cart */
+    .drawer{position:fixed;right:0;top:0;bottom:0;width:min(420px,100%);background:#0c1528;border-left:1px solid var(--border);transform:translateX(100%);transition:.25s ease;z-index:70;display:flex;flex-direction:column}
+    .drawer.open{transform:none}
+    .drawer header{position:sticky;top:0;background:#0c1528;border-bottom:1px solid var(--border)}
+    .drawer h3{margin:0;padding:14px 16px}
+    .drawer .items{flex:1;overflow:auto;padding:12px}
+    .cart-item{display:grid;grid-template-columns:64px 1fr auto;gap:10px;border:1px solid var(--border);border-radius:12px;padding:10px;margin-bottom:10px;background:#0b1a2e}
+    .cart-item .qty{display:flex;align-items:center;gap:6px}
+    .drawer footer{border-top:1px solid var(--border);padding:12px;display:grid;gap:10px}
 
-    /* ADMIN (ẩn mặc định) */
-    .admin-only{display:none}
-    .admin-visible .admin-only{display:initial}
+    /* Member form */
+    form .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media (max-width:700px){form .row{grid-template-columns:1fr}}
+    label{font-size:13px;color:#9fb0c9}
+    input, textarea{background:#0e1930;border:1px solid var(--border);color:var(--text);border-radius:10px;padding:10px 12px;width:100%}
+    textarea{min-height:96px}
 
-    /* FOOTER */
-    footer { padding: 38px 0; color: var(--muted); border-top: 1px solid rgba(255,255,255,.06); }
-  </style><style>
-  .actions{display:flex;gap:.5rem;flex-wrap:wrap}
-  .actions .helper{flex-basis:100%;margin-top:.25rem;font-size:.95rem;opacity:.85}
-</style>
+    /* News (fallback cards) */
+    .news{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media (max-width:900px){.news{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:560px){.news{grid-template-columns:1fr}}
+    .news .ncard{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#0b1426}
+    .news .cover{aspect-ratio:16/9;background:linear-gradient(135deg,#0b213a,#122b4b)}
+    .news .body{padding:12px}
 
+    /* Services */
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media (max-width:900px){.services{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:560px){.services{grid-template-columns:1fr}}
+    .svc{border:1px solid var(--border);border-radius:16px;padding:14px;background:#0b1426}
+
+    /* Footer & policies */
+    footer{border-top:1px solid var(--border);background:#08101f;margin-top:24px}
+    .fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:16px;padding:20px 0}
+    @media (max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
+    @media (max-width:560px){.fgrid{grid-template-columns:1fr}}
+    .fgrid h4{margin:0 0 10px}
+    .copyright{border-top:1px solid var(--border);padding:10px 0;color:#97a6c5}
+
+    /* Floating contact */
+    .contact-fab{position:fixed;right:16px;bottom:16px;display:grid;gap:10px;z-index:80}
+    .fab{display:grid;place-items:center;width:54px;height:54px;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#001018;font-weight:800;box-shadow:0 14px 32px rgba(0,0,0,.35)}
+    .fab:hover{filter:saturate(1.1)}
+
+    /* Back-to-top / Home */
+    .to-top{position:fixed;left:16px;bottom:16px;opacity:0;pointer-events:none;transition:.2s}
+    .to-top.show{opacity:1;pointer-events:auto}
+
+    /* Utility */
+    .muted{color:var(--muted)}
+    .hidden{display:none}
+  </style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="container nav-inner">
-      <div class="brand">
-        <div class="logo">M</div>
-        <div>MXD • Mua sắm & thi công</div>
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo" aria-label="Trang chủ MXD">
+        <span class="logo-badge">MXD</span> MXD – Dụng cụ thi công
+      </a>
+      <nav class="menu" aria-label="Điều hướng chính">
+        <a href="#san-pham">Sản phẩm</a>
+        <a href="#tin-tuc">Tin tức & Kinh nghiệm</a>
+        <a href="#dich-vu">Dịch vụ</a>
+        <a href="#dang-ky">Thành viên</a>
+        <a href="#chinh-sach">Chính sách</a>
+      </nav>
+      <div class="cta">
+        <button class="btn" id="btnCart" aria-label="Mở giỏ hàng">Giỏ hàng (<span id="cartCount">0</span>)</button>
+        <a class="btn btn-primary" href="#san-pham">Mua ngay</a>
       </div>
-      <div class="nav-links">
-        <a class="pill" href="/tin-tuc/">Tin tức & Kinh nghiệm</a>
-
-        <a href="#products" class="pill">Sản phẩm</a>
-        <a href="#membership" class="pill">Đăng ký thành viên</a>
-        <a href="/chinh-sach/doi-tra.html" class="pill">Chính sách</a>
-<button id="toggleAdmin" class="pill admin-only" title="Bảng quản trị">⚙️ Quản trị</button>
-        <button id="openCart" class="btn cart-btn" title="Giỏ hàng">
-          🛒 Giỏ hàng <span id="cartCount" class="badge">0</span>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <header class="hero container">
-    <h1>MXD – Trung tâm mua sắm trực tuyến ngành xây dựng</h1>
-    <p>MXD tuyển từ Lazada, Shopee, TikTok Shop, Tiki…: chỉ những sản phẩm thợ tin dùng ngoài công trình — bền bỉ, tối ưu chi phí.
-</p>  
-    <p>> “Mua ngay” khi bạn sẵn sàng; “Thêm vào giỏ” nếu còn muốn xem tiếp.
-</p>
-    <div class="hero-cta">
-      <a class="btn" href="/tin-tuc/">Đọc Tin tức & Kinh nghiệm</a>
-
-<a href="#products" class="btn brand">Khám phá sản phẩm</a>
-      <a href="#membership" class="btn">Đăng ký thành viên MXD</a>
     </div>
   </header>
 
-  <main class="container">
-    <!-- PRODUCTS -->
-    <section id="products" class="section">
-      <h2>Sản phẩm nổi bật</h2>
-      <p class="muted">Chọn danh mục hoặc tìm kiếm. “Mua ngay” khi bạn sẵn sàng; “Thêm vào giỏ” nếu còn muốn xem tiếp.
-</em> để giữ lại nhiều món rồi thanh toán sau.</p>
-      <div class="filters">
-        <select id="category" class="opt">
-          <option value="all">Tất cả danh mục</option>
-          <option value="Keo ốp lát">Keo ốp lát</option>
-          <option value="Máy cắt">Máy cắt</option>
-          <option value="Lưỡi cắt">Lưỡi cắt</option>
-          <option value="Thước đo">Thước đo</option>
-          <option value="Phụ kiện">Phụ kiện</option>
-        </select>
-        <input id="search" class="search" type="text" placeholder="Tìm tên sản phẩm, mã, công dụng…" />
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container wrap">
+        <div>
+          <h1>Trung tâm mua sắm affiliate ngành xây dựng</h1>
+          <p>Hàng thợ tin dùng – chọn nhanh, mua gọn, dẫn link về các sàn uy tín. Mục tiêu: tối ưu & bền vững.</p>
+          <div class="chips">
+            <span class="chip">Máy móc</span>
+            <span class="chip">Keo & Vật liệu</span>
+            <span class="chip">Dụng cụ đo</span>
+            <span class="chip">An toàn lao động</span>
+          </div>
+        </div>
+        <div class="card">
+          <strong>Cam kết minh bạch:</strong>
+          <p class="muted">Một số liên kết là affiliate, MXD có thể nhận hoa hồng khi bạn mua hàng – không ảnh hưởng giá của bạn.</p>
+          <div class="chips" style="margin-top:6px">
+            <span class="chip">rel="sponsored nofollow noopener"</span>
+            <span class="chip">Bảo vệ quyền riêng tư</span>
+            <span class="chip">Mua tại sàn chính hãng</span>
+          </div>
+        </div>
       </div>
-      <div id="grid" class="grid"></div>
-      <p class="muted" style="margin-top:8px;font-size:12px">Mẹo: thêm <code>#admin</code> vào cuối URL để mở chế độ quản trị và nhập link affiliate hàng loạt.</p>
     </section>
 
-    <!-- MEMBERSHIP -->
-    <section id="membership" class="section">
-      <h2>Đăng ký thành viên MXD</h2>
-      <p class="muted">Thành viên nhận ưu đãi, combo vật tư theo hạng mục thi công, và ưu tiên hỗ trợ kỹ thuật. Form gửi qua Formspree hoặc Google Forms (thay đường dẫn bên dưới).</p>
-      <form id="memberForm" class="form" method="POST" action="https://formspree.io/f/your-form-id">
-        <!-- TODO: Thay your-form-id bằng ID thật của Formspree. Hoặc thay action bằng liên kết Google Forms. -->
-        <div class="row">
-          <div style="flex:1; min-width:220px">
-            <label>Họ tên</label>
-            <input required name="name" type="text" placeholder="Nguyễn Văn A" />
-          </div>
-          <div style="flex:1; min-width:220px">
-            <label>Số điện thoại</label>
-            <input required name="phone" type="tel" placeholder="09xx xxx xxx" />
-          </div>
+    <!-- PRODUCTS -->
+    <section id="san-pham" class="section">
+      <div class="container">
+        <h2>Sản phẩm nổi bật</h2>
+        <p class="lead">10 sản phẩm mẫu để hiển thị – bạn thay link affiliate sau.</p>
+
+        <div class="filters">
+          <input class="input" id="q" placeholder="Tìm theo tên, mã, tag…" />
+          <select id="cat">
+            <option value="">Tất cả danh mục</option>
+          </select>
+          <button class="btn" id="btnReset">Làm mới</button>
         </div>
-        <div class="row" style="margin-top:12px">
-          <div style="flex:1; min-width:220px">
-            <label>Email</label>
-            <input required name="email" type="email" placeholder="mxd6686@gmail.com" />
-          </div>
-          <div style="flex:1; min-width:220px">
-            <label>Mật khẩu</label>
-            <input required name="password" type="password" placeholder="••••••••" />
-          </div>
-        </div>
-        <div style="margin-top:12px">
-          <label>Nhu cầu</label>
-          <textarea name="note" rows="3" placeholder="Ví dụ: cần combo keo ốp lát + lưỡi cắt cho 60m², cần tư vấn chống thấm sân thượng…"></textarea>
-        </div>
-        <div class="row" style="margin-top:14px; justify-content: flex-end;">
-          <button class="btn" type="reset">Xóa</button>
-          <button class="btn brand" type="submit">Đăng ký</button>
-        </div>
-        <p id="memberMsg" class="muted" style="margin-top:10px"></p>
-      </form>
+
+        <div id="grid" class="grid" aria-live="polite"></div>
+      </div>
     </section>
 
-    <!-- ADMIN PANEL (ẩn, mở bằng #admin) -->
-    <section id="adminPanel" class="section admin-only">
-      <h2>⚙️ Quản trị liên kết Affiliate</h2>
-      <div class="form" style="display:grid; gap:12px">
-        <p class="muted">Nhập danh sách <strong>id, link</strong> (mỗi dòng một cặp). Ví dụ: <code>keo-001, https://short.at/abc</code>. Nhấn <em>Áp dụng</em> để gắn vào toàn bộ sản phẩm trùng id. Dữ liệu sẽ lưu trong <code>localStorage</code> và có thể <em>Tải xuống links.json</em>.</p>
-        <textarea id="linksInput" rows="6" placeholder="keo-001, https://...
-may-001, https://...
-..."></textarea>
-        <div class="row">
-          <button id="applyLinks" class="btn brand">Áp dụng</button>
-          <button id="downloadLinks" class="btn">Tải xuống links.json</button>
+    <!-- MEMBER FORM -->
+    <section id="dang-ky" class="section">
+      <div class="container">
+        <h2>Đăng ký thành viên</h2>
+        <p class="lead">Nhận ưu đãi & cập nhật sản phẩm phù hợp công trình của bạn.</p>
+        <form id="memberForm" class="card" onsubmit="return false">
+          <div class="row">
+            <div>
+              <label>Họ và tên</label>
+              <input id="mName" required placeholder="Tên thợ/đơn vị" />
+            </div>
+            <div>
+              <label>Số điện thoại</label>
+              <input id="mPhone" required placeholder="09xxxxxxxx" />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label>Email</label>
+              <input id="mEmail" type="email" placeholder="you@example.com" />
+            </div>
+            <div>
+              <label>Nhu cầu</label>
+              <input id="mNeed" placeholder="Máy cắt, keo ốp lát, an toàn…" />
+            </div>
+          </div>
+          <div>
+            <label>Ghi chú</label>
+            <textarea id="mNote" placeholder="Mô tả công trình/tiêu chí chọn hàng…"></textarea>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn btn-primary" id="btnMember">Gửi đăng ký</button>
+            <span id="memberMsg" class="muted"></span>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- NEWS (fallback static) -->
+    <section id="tin-tuc" class="section">
+      <div class="container">
+        <h2>Tin tức & Kinh nghiệm</h2>
+        <p class="lead">Ba bài viết mẫu (fallback SEO). Khi có dữ liệu JSON, ta sẽ render động.</p>
+        <div class="news" id="news">
+          <article class="ncard">
+            <div class="cover"></div>
+            <div class="body">
+              <h3 style="margin:0 0 6px">Thi công chống thấm: 5 lỗi nhỏ, hậu quả lớn</h3>
+              <p class="muted">Kinh nghiệm từ công trình thực tế: chọn keo, xử lý mạch ngừng, kiểm tra nước…</p>
+            </div>
+          </article>
+          <article class="ncard">
+            <div class="cover"></div>
+            <div class="body">
+              <h3 style="margin:0 0 6px">Chọn máy cắt gạch: lưỡi, công suất, độ bền</h3>
+              <p class="muted">Phân khúc 600–1200W cho thợ thi công dân dụng – gợi ý mẫu tin dùng.</p>
+            </div>
+          </article>
+          <article class="ncard">
+            <div class="cover"></div>
+            <div class="body">
+              <h3 style="margin:0 0 6px">An toàn lao động: kính – găng – tai nghe</h3>
+              <p class="muted">Bộ 3 phải có khi cắt/đục: giảm rủi ro nhưng không vướng tay.</p>
+            </div>
+          </article>
         </div>
-        <details>
-          <summary>Tuỳ chọn nâng cao (SubId/UTM & Fallback)</summary>
-          <div class="row" style="margin-top:8px">
-            <div style="flex:1;min-width:200px"><label>sub1 name</label><input id="sub1n" type="text" value="aff_sub" /></div>
-            <div style="flex:1;min-width:200px"><label>sub1 value</label><input id="sub1v" type="text" value="MXD" /></div>
-          </div>
-          <div class="row" style="margin-top:8px">
-            <div style="flex:1;min-width:200px"><label>sub2 name</label><input id="sub2n" type="text" value="aff_sub2" /></div>
-            <div style="flex:1;min-width:200px"><label>sub3 name</label><input id="sub3n" type="text" value="aff_sub3" /></div>
-          </div>
-          <div class="row" style="margin-top:8px">
-            <div style="flex:1;min-width:200px"><label>UTM source</label><input id="utmSource" type="text" value="mxd" /></div>
-            <div style="flex:1;min-width:200px"><label>UTM campaign</label><input id="utmCamp" type="text" value="affiliate-store" /></div>
-          </div>
-          <p class="muted">Fallback theo danh mục (nếu sản phẩm chưa có link, sẽ dùng link của danh mục):</p>
-          <textarea id="fallbackInput" rows="4" placeholder="Keo ốp lát, https://...
-Máy cắt, https://..."></textarea>
-          <div class="row"><button id="applyConfig" class="btn">Lưu cấu hình</button></div>
-        </details>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="dich-vu" class="section">
+      <div class="container">
+        <h2>Dịch vụ MXD</h2>
+        <p class="lead">Tư vấn chọn sản phẩm – chuẩn hóa bộ vật tư – tối ưu chi phí theo hạng mục.</p>
+        <div class="services">
+          <div class="svc"><strong>Bộ vật tư lát nền</strong><p class="muted">Bay răng cưa, gạt vữa, keo ốp lát theo mác gạch & kích thước.</p></div>
+          <div class="svc"><strong>Chống thấm nhà vệ sinh</strong><p class="muted">Checklist vật tư & quy trình test nước, hạn chế thấm ngược.</p></div>
+          <div class="svc"><strong>Thiết bị cắt – mài</strong><p class="muted">Lựa chọn máy, lưỡi cắt, kính bảo hộ – an toàn vẫn đẹp mạch.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POLICIES -->
+    <section id="chinh-sach" class="section">
+      <div class="container">
+        <h2>Chính sách</h2>
+        <p class="lead">Minh bạch & bảo mật khi bạn mua qua liên kết.</p>
+        <ul>
+          <li><a href="/chinh-sach/doi-tra.html">Chính sách đổi trả</a></li>
+          <li><a href="/chinh-sach/giao-hang.html">Chính sách giao hàng</a></li>
+          <li><a href="/chinh-sach/bao-mat.html">Chính sách bảo mật</a></li>
+          <li><a href="/chinh-sach/affiliate.html">Công bố liên kết tiếp thị (affiliate)</a></li>
+        </ul>
       </div>
     </section>
   </main>
 
-  <!-- CART DRAWER -->
-  <aside id="drawer" class="drawer" aria-hidden="true">
-    <div class="drawer-header">
-      <strong>Giỏ hàng</strong>
-      <button id="closeCart" class="btn">Đóng</button>
-    </div>
-    <div id="cartItems" class="drawer-body"></div>
-    <div class="drawer-footer">
-      <div class="row space">
-        <div>Tổng:</div>
-        <strong id="cartTotal">0₫</strong>
-      </div>
-      <button id="checkout" class="btn brand">Thanh toán</button>
-      <button id="clearCart" class="btn" style="background: rgba(239,68,68,.15); border-color: rgba(239,68,68,.35);">Xóa giỏ</button>
-      <p class="muted" style="font-size:12px">Thanh toán có thể chuyển hướng tới từng <em>link affiliate</em> tương ứng của sản phẩm. Có thể bật chế độ gộp đơn qua MXD nếu cần (tùy chỉnh sau).</p>
-    </div>
-  </aside>
-
+  <!-- FOOTER -->
   <footer>
-    <div class="container">
-      <div class="row space" style="flex-wrap: wrap; gap:12px;">
-        <div>© <span id="year"></span> MXD – Hàng tin dùng của thợ. Thiết kế & vận hành bởi MXD.</div>
-        <div class="muted">Liên hệ: <a href="mailto:mxd6686@gmail.com">mxd6686@gmail.com</a></div>
+    <div class="container fgrid">
+      <div>
+        <h4>MXD</h4>
+        <p class="muted">Trung tâm tiếp thị liên kết ngành xây dựng. Tối ưu & bền vững.</p>
+      </div>
+      <div>
+        <h4>Danh mục</h4>
+        <p><a href="#san-pham">Sản phẩm</a><br><a href="#tin-tuc">Tin tức & Kinh nghiệm</a><br><a href="#dich-vu">Dịch vụ</a></p>
+      </div>
+      <div>
+        <h4>Liên hệ</h4>
+        <p><a id="lnCall" href="#">Gọi</a><br><a id="lnZalo" target="_blank" rel="noopener">Zalo</a><br><a id="lnMsg" target="_blank" rel="noopener">Messenger</a></p>
+      </div>
+      <div>
+        <h4>Chính sách</h4>
+        <p><a href="#chinh-sach">Xem tất cả</a></p>
       </div>
     </div>
+    <div class="container copyright">© <span id="y"></span> MXD. Một số liên kết là affiliate; MXD có thể nhận hoa hồng.</div>
   </footer>
 
-  <script>
-    // ========= DỮ LIỆU SẢN PHẨM =========
-    // TODO: Thay affiliateUrl = '#' bằng link thật của bạn.
-    const PRODUCTS = [
-  // Keo ốp lát (20)
-  { id: 'keo-001', name: 'Keo ốp lát đa năng MXD-PRO', price: 145000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Gói 5kg','Gói 20kg'] },
-  { id: 'keo-002', name: 'Keo chống thấm sàn mái MXD-Guard', price: 265000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1620936041185-d996ad85e818?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Lon 1L','Lon 5L'] },
-  { id: 'keo-003', name: 'Keo dán gạch chống rêu – nội/ngoại thất', price: 175000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1523419409543-a7ea0c203267?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Gói 10kg','Gói 20kg'] },
-  { id: 'keo-004', name: 'Keo chà ron chống nứt – sàn ướt', price: 119000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1620936041185-d996ad85e818?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['1kg','5kg'] },
-  { id: 'keo-005', name: 'Vữa dán gạch đá granite – MXD GraniteFix', price: 289000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Bao 20kg'] },
-  { id: 'keo-006', name: 'Keo silicone trung tính – kháng nấm mốc', price: 85000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1620936041185-d996ad85e818?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Tuýp 300ml'] },
-  { id: 'keo-007', name: 'Keo ốp tường ngoài trời – chịu UV', price: 199000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1523419409543-a7ea0c203267?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Gói 10kg','Gói 25kg'] },
-  { id: 'keo-008', name: 'Keo dán gạch siêu mỏng – tiết kiệm vật tư', price: 159000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Bao 20kg'] },
-  { id: 'keo-009', name: 'Keo dán gạch gỗ nhựa – WPC/nhựa giả gỗ', price: 185000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1620936041185-d996ad85e818?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Lon 1L','Lon 5L'] },
-  { id: 'keo-010', name: 'Keo xử lý khe nứt bê tông – epoxy 2 thành phần', price: 329000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1523419409543-a7ea0c203267?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Bộ 1kg'] },
-  { id: 'keo-011', name: 'Keo dán gạch khổ lớn – tường cao tầng', price: 315000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Bao 25kg'] },
-  { id: 'keo-012', name: 'Keo chít mạch kháng hóa chất – hồ bơi', price: 245000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1620936041185-d996ad85e818?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['1kg','5kg'] },
-  { id: 'keo-013', name: 'Keo chống thấm hai thành phần – sàn vệ sinh', price: 275000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1523419409543-a7ea0c203267?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Bộ 5kg'] },
-  { id: 'keo-014', name: 'Keo dán đá tự nhiên – màu xám/kem', price: 205000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Bao 20kg'] },
-  { id: 'keo-015', name: 'Keo sửa chữa gạch bong tróc – nhanh khô', price: 99000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1620936041185-d996ad85e818?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Tuýp 300ml'] },
-  { id: 'keo-016', name: 'Keo dán gạch chống trượt – sàn dốc', price: 189000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1523419409543-a7ea0c203267?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Bao 20kg'] },
-  { id: 'keo-017', name: 'Keo dán gạch gốm – nội thất', price: 139000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Gói 10kg'] },
-  { id: 'keo-018', name: 'Keo chít mạch chống ố – màu xám bạc', price: 115000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1620936041185-d996ad85e818?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Hộp 1kg'] },
-  { id: 'keo-019', name: 'Keo chống thấm tường đứng – siêu bám dính', price: 239000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1523419409543-a7ea0c203267?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Lon 5L'] },
-  { id: 'keo-020', name: 'Keo dán gạch siêu dính – PRO Max', price: 325000, category: 'Keo ốp lát', img: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Bao 25kg'] },
+  <!-- FLOATING CONTACT -->
+  <div class="contact-fab" aria-label="Liên hệ nhanh">
+    <a class="fab" id="fabCall" href="0338328898" title="Gọi">📞</a>
+    <a class="fab" id="fabZalo" href="https://zalo.me/0338328898" target="_blank" rel="noopener" title="Zalo">💬</a>
+    <a class="fab" id="fabMsg" href="https://m.me/mxd6686" target="_blank" rel="noopener" title="Messenger">📨</a>
+  </div>
 
-  // Máy cắt (20)
-  { id: 'may-001', name: 'Máy cắt gạch MXD-1200 Plus', price: 1890000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1601637155544-74eb9e3d7c29?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Bản tiêu chuẩn','Bản PRO'] },
-  { id: 'may-002', name: 'Máy cắt cầm tay 720W – nhẹ & khỏe', price: 990000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1564429238817-a0cbe8ed9e5a?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Thân máy','Kèm 2 lưỡi cắt'] },
-  { id: 'may-003', name: 'Máy cắt gạch bàn trượt 1000mm', price: 2590000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1601637155544-74eb9e3d7c29?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Bản 800mm','Bản 1000mm'] },
-  { id: 'may-004', name: 'Máy cắt bê tông 2200W – đĩa 355mm', price: 3450000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1564429238817-a0cbe8ed9e5a?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Thân máy','Kèm 1 lưỡi'] },
-  { id: 'may-005', name: 'Máy cắt gạch mini – 600W', price: 690000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1601637155544-74eb9e3d7c29?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Có vali','Không vali'] },
-  { id: 'may-006', name: 'Máy cắt đá 125mm – chống bụi', price: 1150000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1564429238817-a0cbe8ed9e5a?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['125mm','150mm'] },
-  { id: 'may-007', name: 'Máy cắt gạch bàn – PRO Rail', price: 2790000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1601637155544-74eb9e3d7c29?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['1000mm','1200mm'] },
-  { id: 'may-008', name: 'Máy cắt kim loại mỏng – lưỡi 185mm', price: 1590000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1564429238817-a0cbe8ed9e5a?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['185mm','210mm'] },
-  { id: 'may-009', name: 'Máy cắt đá nước – giảm bụi', price: 2290000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1601637155544-74eb9e3d7c29?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['125mm'] },
-  { id: 'may-010', name: 'Máy cắt gạch chạy pin – 18V', price: 3290000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1564429238817-a0cbe8ed9e5a?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Thân máy','Full kit'] },
-  { id: 'may-011', name: 'Máy cắt nhôm bàn – 255mm', price: 3150000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1564429238817-a0cbe8ed9e5a?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Lưỡi 60 răng','Lưỡi 80 răng'] },
-  { id: 'may-012', name: 'Máy cắt gạch 2 thanh dẫn – chính xác', price: 2450000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1601637155544-74eb9e3d7c29?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['900mm','1100mm'] },
-  { id: 'may-013', name: 'Máy cắt bàn nước – 750W', price: 2990000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1601637155544-74eb9e3d7c29?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Đĩa 180mm'] },
-  { id: 'may-014', name: 'Cưa lọng – cắt gỗ/nhựa/kim loại', price: 890000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1564429238817-a0cbe8ed9e5a?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Thân máy','Full kit'] },
-  { id: 'may-015', name: 'Máy cắt đa năng – rung tần số cao', price: 1290000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1564429238817-a0cbe8ed9e5a?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Bộ 10 lưỡi','Bộ 20 lưỡi'] },
-  { id: 'may-016', name: 'Máy cắt sắt bàn – 14 inch', price: 2250000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1564429238817-a0cbe8ed9e5a?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['14 inch'] },
-  { id: 'may-017', name: 'Máy cắt gạch bàn ProLine – 800mm', price: 2390000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1601637155544-74eb9e3d7c29?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['800mm'] },
-  { id: 'may-018', name: 'Máy cắt đá 1500W – chống kẹt', price: 1450000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1564429238817-a0cbe8ed9e5a?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['125mm','150mm'] },
-  { id: 'may-019', name: 'Máy cắt gạch khổ lớn – 1400mm', price: 3950000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1601637155544-74eb9e3d7c29?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['1400mm'] },
-  { id: 'may-020', name: 'Máy cắt bê tông chạy xăng – 5.5HP', price: 7450000, category: 'Máy cắt', img: 'https://images.unsplash.com/photo-1564429238817-a0cbe8ed9e5a?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Kèm lưỡi 350mm'] },
+  <a href="#" class="btn btn-primary to-top" id="toTop" aria-label="Về đầu trang">Trang chủ</a>
 
-  // Lưỡi cắt (20)
-  { id: 'luoi-001', name: 'Lưỡi cắt gạch 125mm – độ bền cao', price: 85000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1620497529985-593de8eac2a1?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['100mm','125mm','180mm'] },
-  { id: 'luoi-002', name: 'Lưỡi cắt kim cương – cắt ướt/khô', price: 129000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1598033144365-bc5d21334509?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['115mm','125mm'] },
-  { id: 'luoi-003', name: 'Lưỡi cắt bê tông – rãnh mịn', price: 179000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1620497529985-593de8eac2a1?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['125mm','150mm'] },
-  { id: 'luoi-004', name: 'Đĩa cắt đa năng – inox/gỗ/nhựa', price: 99000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1598033144365-bc5d21334509?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['115mm'] },
-  { id: 'luoi-005', name: 'Lưỡi cắt granite – cạnh sắc', price: 155000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1620497529985-593de8eac2a1?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['125mm'] },
-  { id: 'luoi-006', name: 'Lưỡi cắt kim cương Turbo – nhanh & mát', price: 165000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1598033144365-bc5d21334509?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['115mm','125mm'] },
-  { id: 'luoi-007', name: 'Lưỡi cắt gạch men – hạn chế sứt mẻ', price: 135000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1620497529985-593de8eac2a1?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['125mm'] },
-  { id: 'luoi-008', name: 'Lưỡi cắt khô – ít bụi', price: 115000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1598033144365-bc5d21334509?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['100mm','115mm'] },
-  { id: 'luoi-009', name: 'Đĩa cắt gỗ phủ carbide – bền', price: 89000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1620497529985-593de8eac2a1?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['185mm'] },
-  { id: 'luoi-010', name: 'Lưỡi cắt nhôm – 80 răng', price: 195000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1598033144365-bc5d21334509?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['255mm'] },
-  { id: 'luoi-011', name: 'Lưỡi cắt inox – chống tòe', price: 125000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1620497529985-593de8eac2a1?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['125mm'] },
-  { id: 'luoi-012', name: 'Đĩa cắt mỏng – đường cắt đẹp', price: 99000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1598033144365-bc5d21334509?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['115mm'] },
-  { id: 'luoi-013', name: 'Lưỡi cắt đá hoa cương – Pro', price: 215000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1620497529985-593de8eac2a1?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['150mm'] },
-  { id: 'luoi-014', name: 'Đĩa cắt sắt – ít tia lửa', price: 65000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1598033144365-bc5d21334509?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['125mm'] },
-  { id: 'luoi-015', name: 'Lưỡi cắt kim cương segment – tuổi thọ cao', price: 179000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1620497529985-593de8eac2a1?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['125mm'] },
-  { id: 'luoi-016', name: 'Đĩa cắt gạch cỡ lớn – 180mm', price: 169000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1598033144365-bc5d21334509?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['180mm'] },
-  { id: 'luoi-017', name: 'Lưỡi cắt gạch mỏng – ít sứt', price: 139000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1620497529985-593de8eac2a1?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['100mm','125mm'] },
-  { id: 'luoi-018', name: 'Đĩa cắt composite – ít bụi', price: 99000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1598033144365-bc5d21334509?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['115mm'] },
-  { id: 'luoi-019', name: 'Lưỡi cắt kính – chuyên dụng', price: 245000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1620497529985-593de8eac2a1?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['125mm'] },
-  { id: 'luoi-020', name: 'Đĩa cắt gạch tráng kim cương – ProLine', price: 199000, category: 'Lưỡi cắt', img: 'https://images.unsplash.com/photo-1598033144365-bc5d21334509?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['125mm'] },
+  <!-- CART DRAWER -->
+  <aside class="drawer" id="cartDrawer" aria-hidden="true" aria-label="Giỏ hàng">
+    <header><h3 class="container">Giỏ hàng</h3></header>
+    <div class="items" id="cartItems"></div>
+    <footer>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Tổng sản phẩm:</span><strong id="cartTotalQty">0</strong></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Tạm tính:</span><strong id="cartTotal">0₫</strong></div>
+      <button class="btn btn-primary" id="btnCheckout">Thanh toán (mở link sàn)</button>
+      <button class="btn" id="btnCloseCart">Đóng</button>
+    </footer>
+  </aside>
 
-  // Thước đo (20)
-  { id: 'thuoc-001', name: 'Thước thủy MXD – độ chính xác cao', price: 129000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['30cm','60cm','100cm'] },
-  { id: 'thuoc-002', name: 'Thước cuộn thép – 5m khóa tự động', price: 59000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['3m','5m','7.5m'] },
-  { id: 'thuoc-003', name: 'Thước laser 30m – cân bằng tự động', price: 890000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['30m','50m'] },
-  { id: 'thuoc-004', name: 'Máy cân mực laser 12 tia – xanh', price: 1550000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Pin 4Ah','Pin 6Ah'] },
-  { id: 'thuoc-005', name: 'Thước thủy nam châm – bám chắc', price: 159000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['40cm','60cm'] },
-  { id: 'thuoc-006', name: 'Compa đo gỗ – điều chỉnh nhanh', price: 99000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Bộ 1 chiếc'] },
-  { id: 'thuoc-007', name: 'Thước nhôm chữ L – 30x50cm', price: 119000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['30x50cm'] },
-  { id: 'thuoc-008', name: 'Thước ke vuông – thợ mộc', price: 89000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['20cm','30cm'] },
-  { id: 'thuoc-009', name: 'Máy đo khoảng cách laser – mini', price: 599000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['30m'] },
-  { id: 'thuoc-010', name: 'Thước cuộn sợi thủy tinh – 30m', price: 159000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['30m'] },
-  { id: 'thuoc-011', name: 'Thước kẹp điện tử – 150mm', price: 259000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['150mm'] },
-  { id: 'thuoc-012', name: 'Thước thủy 3 ống – chuẩn mực', price: 139000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['40cm'] },
-  { id: 'thuoc-013', name: 'Thước đo góc điện tử – 0.1°', price: 429000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['200mm'] },
-  { id: 'thuoc-014', name: 'Thước lá feeler gauge – 32 lá', price: 79000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Bộ 32 lá'] },
-  { id: 'thuoc-015', name: 'Mốc đo laser gắn tường – DIY', price: 189000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['1 bộ'] },
-  { id: 'thuoc-016', name: 'Máy cân mực tia xanh – 16 tia', price: 1890000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Pin 4Ah','Pin 6Ah'] },
-  { id: 'thuoc-017', name: 'Thước cuộn có nam châm – 8m', price: 89000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['8m'] },
-  { id: 'thuoc-018', name: 'Máy đo độ ẩm vật liệu – cầm tay', price: 479000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['1 bộ'] },
-  { id: 'thuoc-019', name: 'Thước thủy mini – gọn túi', price: 59000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['10cm'] },
-  { id: 'thuoc-020', name: 'Bộ đánh dấu đa góc – thợ ốp lát', price: 119000, category: 'Thước đo', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['1 bộ'] },
-
-  // Phụ kiện (20)
-  { id: 'phu-001', name: 'Bộ phụ kiện LIVOO – combo 12 món', price: 399000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Combo A','Combo B'] },
-  { id: 'phu-002', name: 'Găng tay chống cắt – cấp 5', price: 69000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['M','L','XL'] },
-  { id: 'phu-003', name: 'Kính bảo hộ – chống bụi', price: 49000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Trong','Vàng'] },
-  { id: 'phu-004', name: 'Nút tai chống ồn – 32dB', price: 39000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['1 cặp','5 cặp'] },
-  { id: 'phu-005', name: 'Khẩu trang than hoạt tính – 10 cái', price: 79000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Hộp 10 cái'] },
-  { id: 'phu-006', name: 'Đai lưng bảo hộ – công trình', price: 159000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['M','L','XL'] },
-  { id: 'phu-007', name: 'Bịt gối chống va đập – EVA', price: 99000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['1 đôi'] },
-  { id: 'phu-008', name: 'Băng keo giấy – 24mm x 20m', price: 19000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['1 cuộn','10 cuộn'] },
-  { id: 'phu-009', name: 'Băng keo chống thấm – butyl 10cm', price: 129000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['10cm x 5m'] },
-  { id: 'phu-010', name: 'Dao rọc giấy – khóa an toàn', price: 29000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Kèm 5 lưỡi'] },
-  { id: 'phu-011', name: 'Búa cao su – lát gạch', price: 69000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['500g'] },
-  { id: 'phu-012', name: 'Bay răng cưa – 6/8/10mm', price: 49000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['6mm','8mm','10mm'] },
-  { id: 'phu-013', name: 'Bàn chà ron – mút EVA', price: 59000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['1 chiếc'] },
-  { id: 'phu-014', name: 'Bộ nêm gạch cân bằng – 100 cái', price: 119000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['100 cái'] },
-  { id: 'phu-015', name: 'Cữ căn gạch – 1/2/3mm', price: 19000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['1mm','2mm','3mm'] },
-  { id: 'phu-016', name: 'Súng bắn keo silicon – thân thép', price: 69000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Chuẩn 225mm'] },
-  { id: 'phu-017', name: 'Bộ mũi khoan gạch – 6/8/10mm', price: 99000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['Bộ 6/8/10'] },
-  { id: 'phu-018', name: 'Hộp đồ nghề – 16 inch', price: 129000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['16"'] },
-  { id: 'phu-019', name: 'Lô sơn – đầu mịn 9 inch', price: 39000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['9 inch'] },
-  { id: 'phu-020', name: 'Cọ sơn đầu dẹt – 2 inch', price: 29000, category: 'Phụ kiện', img: 'https://images.unsplash.com/photo-1603555501671-8f0a5f1f2b2d?q=80&w=1200&auto=format&fit=crop', affiliateUrl: '#', options: ['2 inch'] },
-];
-
-    // ========= TIỆN ÍCH =========
-    const fmtVND = n => n.toLocaleString('vi-VN') + '₫';
-    const $ = sel => document.querySelector(sel);
-    const $$ = sel => document.querySelectorAll(sel);
-
-    // ======== LIÊN KẾT & CẤU HÌNH AFFILIATE ========
-    const LINKS_LOCAL_KEY = 'mxd_links';
-    const CONFIG_KEY = 'mxd_cfg';
-    let LINK_MAP = {}; // id -> url
-    let FALLBACK = {}; // category -> url
-    let CFG = { sub1n:'aff_sub', sub1v:'MXD', sub2n:'aff_sub2', sub3n:'aff_sub3', utmSource:'mxd', utmCamp:'affiliate-store' };
-
-    function loadLocal(){
-      try { LINK_MAP = JSON.parse(localStorage.getItem(LINKS_LOCAL_KEY)||'{}'); } catch {}
-      try { const c = JSON.parse(localStorage.getItem(CONFIG_KEY)||'{}'); CFG = { ...CFG, ...c }; } catch {}
+  <!-- JSON-LD Organization & Website -->
+  <script type="application/ld+json" id="orgLD">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"MXD",
+    "url":"https://tranmai210jlo.github.io/",
+    "logo":"https://tranmai210jlo.github.io/assets/og-home.jpg"
+  }
+  </script>
+  <script type="application/ld+json" id="siteLD">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"MXD – Dụng cụ thi công & Vật tư",
+    "url":"https://tranmai210jlo.github.io/",
+    "potentialAction":{
+      "@type":"SearchAction",
+      "target":"https://tranmai210jlo.github.io/?q={search_term_string}",
+      "query-input":"required name=search_term_string"
     }
-    function saveLocal(){ localStorage.setItem(LINKS_LOCAL_KEY, JSON.stringify(LINK_MAP)); localStorage.setItem(CONFIG_KEY, JSON.stringify(CFG)); }
-
-    function parsePairs(text){
-      const map = {};
-      text.split(/
-+/).map(l=>l.trim()).filter(Boolean).forEach(line=>{
-        const m = line.split(/,|	/); const k=(m[0]||'').trim(); const v=(m[1]||'').trim(); if(k&&v) map[k]=v;
-      });
-      return map;
-    }
-
-    function appendParams(url, dict){
-      if(!url) return '#';
-      try{
-        const u = new URL(url);
-        Object.entries(dict).forEach(([k,v])=>{ if(v) u.searchParams.set(k, v); });
-        // UTM an toàn cho mọi network
-        if(CFG.utmSource) u.searchParams.set('utm_source', CFG.utmSource);
-        if(CFG.utmCamp) u.searchParams.set('utm_campaign', CFG.utmCamp);
-        return u.toString();
-      }catch{ return url; }
-    }
-
-    function buildUrlFor(p){
-      // Ưu tiên link theo id, sau đó theo category, cuối cùng giữ nguyên nếu có
-      let base = LINK_MAP[p.id] || p.affiliateUrl || FALLBACK[p.category] || '#';
-      const params = {};
-      if(CFG.sub1n && CFG.sub1v) params[CFG.sub1n]=CFG.sub1v;
-      if(CFG.sub2n) params[CFG.sub2n]=p.id; // gắn ID sản phẩm
-      if(CFG.sub3n) params[CFG.sub3n]=p.category; // gắn danh mục
-      return appendParams(base, params);
-    }
-
-    function hydrateLinks(){
-      PRODUCTS.forEach(p=>{ p.affiliateUrl = LINK_MAP[p.id] || p.affiliateUrl || FALLBACK[p.category] || '#'; });
-    }
-
-    function detectAdmin(){
-      const isAdmin = location.hash.includes('admin') || localStorage.getItem('mxd_admin')==='1';
-      if(isAdmin){ document.body.classList.add('admin-visible'); $('#toggleAdmin')?.classList.remove('admin-only'); $('#adminPanel')?.classList.remove('admin-only'); localStorage.setItem('mxd_admin','1'); }
-    }
-
-    // ========= STATE =========
-    const STATE = {
-      cart: JSON.parse(localStorage.getItem('mxd_cart') || '[]'),
-      category: 'all',
-      q: ''
-    };
-
-    function saveCart(){ localStorage.setItem('mxd_cart', JSON.stringify(STATE.cart)); }
-    function cartCount(){ return STATE.cart.reduce((s,i)=>s+i.qty,0); }
-    function cartTotal(){ return STATE.cart.reduce((s,i)=>s+i.qty*i.price,0); }
-
-    // ========= RENDER SẢN PHẨM =========
-    function renderProducts(){
-      const grid = $('#grid');
-      const term = STATE.q.trim().toLowerCase();
-      const list = PRODUCTS.filter(p => (STATE.category === 'all' || p.category === STATE.category) && (!term || p.name.toLowerCase().includes(term)));
-      grid.innerHTML = list.map(p => `
-        <article class="card" data-id="${p.id}">
-          <div class="img-wrap"><img src="${p.img}" alt="${p.name}"></div>
-          <div class="content">
-            <div class="row space"><strong>${p.name}</strong><span class="tag">${p.category}</span></div>
-            <div class="row space"><span class="price">${fmtVND(p.price)}</span>
-              <select class="opt" data-opt>
-                ${p.options.map(o=>`<option value="${o}">${o}</option>`).join('')}
-              </select>
-            </div>
-            <div class="row">
-              <button class="btn brand" data-buy>Mua ngay</button>
-              <button class="btn" data-add>Thêm vào giỏ</button>
-            </div>
-          </div>
-        </article>
-      `).join('');
-
-      // Bind buy-now
-      $$('#grid [data-buy]').forEach(btn => btn.addEventListener('click', e => {
-        const card = e.target.closest('.card');
-        const id = card.dataset.id;
-        const prod = PRODUCTS.find(x=>x.id===id);
-        const final = buildUrlFor(prod);
-        if(final === '#') { alert('Sản phẩm chưa có link affiliate. Vào #admin để dán link.'); return; }
-        window.open(final, '_blank', 'noopener');
-      }));
-
-      // Bind add-to-cart
-      $$('#grid [data-add]').forEach(btn => btn.addEventListener('click', e => {
-        const card = e.target.closest('.card');
-        const id = card.dataset.id;
-        const prod = PRODUCTS.find(x=>x.id===id);
-        const opt = card.querySelector('[data-opt]').value;
-        addToCart({ id: prod.id + '|' + opt, sku: prod.id, name: prod.name + ' – ' + opt, price: prod.price, img: prod.img, url: buildUrlFor(prod) });
-      }));
-
-      // Bind add-to-cart
-      $$('#grid [data-add]').forEach(btn => btn.addEventListener('click', e => {
-        const card = e.target.closest('.card');
-        const id = card.dataset.id;
-        const prod = PRODUCTS.find(x=>x.id===id);
-        const opt = card.querySelector('[data-opt]').value;
-        addToCart({ id: prod.id + '|' + opt, sku: prod.id, name: prod.name + ' – ' + opt, price: prod.price, img: prod.img, url: prod.affiliateUrl });
-      }));
-    }
-
-    // ========= GIỎ HÀNG =========
-    function addToCart(item){
-      const found = STATE.cart.find(i=>i.id===item.id);
-      if(found) found.qty += 1; else STATE.cart.push({ ...item, qty: 1 });
-      saveCart();
-      updateCartUI();
-      openCart();
-    }
-    function removeFromCart(id){ STATE.cart = STATE.cart.filter(i=>i.id!==id); saveCart(); updateCartUI(); }
-    function changeQty(id, d){
-      const it = STATE.cart.find(i=>i.id===id); if(!it) return;
-      it.qty = Math.max(1, it.qty + d); saveCart(); updateCartUI();
-    }
-    function clearCart(){ STATE.cart = []; saveCart(); updateCartUI(); }
-
-    function updateCartUI(){
-      $('#cartCount').textContent = cartCount();
-      $('#cartTotal').textContent = fmtVND(cartTotal());
-      const list = STATE.cart.map(i=>`
-        <div class="cart-item">
-          <img src="${i.img}" alt="${i.name}">
-          <div>
-            <div class="row space"><strong>${i.name}</strong><button class="btn" data-remove="${i.id}">✕</button></div>
-            <div class="row space"><span class="muted">${fmtVND(i.price)}</span>
-              <span class="qty">
-                <button class="btn" data-dec="${i.id}">−</button>
-                <strong>${i.qty}</strong>
-                <button class="btn" data-inc="${i.id}">+</button>
-              </span>
-            </div>
-          </div>
-        </div>
-      `).join('');
-      $('#cartItems').innerHTML = list || '<p class="muted">Giỏ hàng trống.</p>';
-
-      // Bind actions
-      $$('#cartItems [data-remove]').forEach(b=> b.addEventListener('click', e=> removeFromCart(e.target.dataset.remove)) );
-      $$('#cartItems [data-inc]').forEach(b=> b.addEventListener('click', e=> changeQty(e.target.dataset.inc, +1)) );
-      $$('#cartItems [data-dec]').forEach(b=> b.addEventListener('click', e=> changeQty(e.target.dataset.dec, -1)) );
-    }
-
-    function openCart(){ $('#drawer').classList.add('open'); $('#drawer').setAttribute('aria-hidden','false'); }
-    function closeCart(){ $('#drawer').classList.remove('open'); $('#drawer').setAttribute('aria-hidden','true'); }
-
-    // ========= SỰ KIỆN =========
-    $('#category').addEventListener('change', e => { STATE.category = e.target.value; renderProducts(); });
-    $('#search').addEventListener('input', e => { STATE.q = e.target.value; renderProducts(); });
-    $('#openCart').addEventListener('click', openCart);
-    $('#closeCart').addEventListener('click', closeCart);
-    $('#clearCart').addEventListener('click', clearCart);
-    $('#checkout').addEventListener('click', () => {
-      if(!STATE.cart.length) { alert('Giỏ hàng đang trống.'); return; }
-      const urls = [...new Set(STATE.cart.map(i=>buildUrlFor({ id:i.sku, category:(PRODUCTS.find(p=>p.id===i.sku)||{}).category, affiliateUrl:i.url }))).filter(u=>u && u!=='#')];
-      urls.forEach(u => window.open(u, '_blank','noopener'));
-      alert('Đã mở các liên kết thanh toán/affiliate trong tab mới.');
-    });
-
-    // Form thành viên – xác nhận nhanh phía client; server-side do Formspree/Google Forms xử lý.
-    $('#memberForm').addEventListener('submit', e => {
-      // Cho phép submit thực sự, đồng thời hiện thông báo nhẹ nhàng.
-      $('#memberMsg').textContent = 'Đang gửi đăng ký…';
-      setTimeout(()=> $('#memberMsg').textContent = 'Đã gửi! Vui lòng kiểm tra email để xác nhận thành viên.', 300);
-    });
-
-    // ========= KHỞI TẠO =========
-    loadLocal();
-    detectAdmin();
-
-    // Nếu có file links.json thì merge, sau đó hydrate & render
-    fetch('links.json').then(r=>r.ok?r.json():{}).then(map=>{ LINK_MAP = { ...map, ...LINK_MAP }; hydrateLinks(); renderProducts(); updateCartUI(); }).catch(()=>{ hydrateLinks(); renderProducts(); updateCartUI(); });
-
-    // Admin controls
-    $('#toggleAdmin')?.addEventListener('click', ()=>{
-      document.body.classList.toggle('admin-visible');
-      $('#adminPanel')?.classList.toggle('admin-only');
-      const on = document.body.classList.contains('admin-visible');
-      localStorage.setItem('mxd_admin', on?'1':'0');
-    });
-    // Prefill admin fields
-    $('#linksInput') && ($('#linksInput').value = Object.entries(LINK_MAP).map(([k,v])=>`${k}, ${v}`).join('
-'));
-    $('#fallbackInput') && ($('#fallbackInput').value = Object.entries(FALLBACK).map(([k,v])=>`${k}, ${v}`).join('
-'));
-    if($('#sub1n')){ $('#sub1n').value = CFG.sub1n; $('#sub1v').value = CFG.sub1v; $('#sub2n').value = CFG.sub2n; $('#sub3n').value = CFG.sub3n; $('#utmSource').value = CFG.utmSource; $('#utmCamp').value = CFG.utmCamp; }
-
-    $('#applyLinks')?.addEventListener('click', ()=>{
-      const map = parsePairs($('#linksInput').value||'');
-      LINK_MAP = { ...LINK_MAP, ...map };
-      saveLocal(); hydrateLinks(); renderProducts();
-      alert('Đã áp dụng link cho sản phẩm trùng id.');
-    });
-    $('#applyConfig')?.addEventListener('click', ()=>{
-      FALLBACK = parsePairs($('#fallbackInput').value||'');
-      CFG = { sub1n:$('#sub1n').value, sub1v:$('#sub1v').value, sub2n:$('#sub2n').value, sub3n:$('#sub3n').value, utmSource:$('#utmSource').value, utmCamp:$('#utmCamp').value };
-      saveLocal(); hydrateLinks(); renderProducts();
-      alert('Đã lưu cấu hình & fallback.');
-    });
-    $('#downloadLinks')?.addEventListener('click', ()=>{
-      const blob = new Blob([JSON.stringify(LINK_MAP, null, 2)], {type:'application/json'});
-      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'links.json'; a.click(); URL.revokeObjectURL(a.href);
-    });
-
-    $('#memberForm').addEventListener('submit', e => {
-      $('#memberMsg').textContent = 'Đang gửi đăng ký…';
-      setTimeout(()=> $('#memberMsg').textContent = 'Đã gửi! Vui lòng kiểm tra email để xác nhận thành viên.', 300);
-    });
-
-    $('#year').textContent = new Date().getFullYear();
+  }
   </script>
 
-  <!-- HƯỚNG DẪN NHANH (ghi chú trong file):
-    1) Đổi chữ "Mua qua link affiliate" thành "Mua ngay": ĐÃ LÀM.
-    2) Thêm nút "Thêm vào giỏ": ĐÃ LÀM – có giỏ hàng, tăng/giảm số lượng, xóa, tổng tiền. Lưu localStorage.
-    3) Trang chủ có mục "Đăng ký thành viên": ĐÃ LÀM – dùng Formspree (thay your-form-id) hoặc Google Forms.
-    4) Thêm danh mục, tìm kiếm: ĐÃ LÀM.
-    5) Thay link affiliate: sửa trường affiliateUrl trong mảng PRODUCTS ở trên.
-    6) Tùy chọn sản phẩm (size/loại): ĐÃ LÀM qua <select> options, tách SKU theo biến thể.
-    7) GitHub Pages: chỉ cần commit file này làm index.html (đổi tên file sang index.html) là chạy.
-  -->
+  <script>
+  // =======================
+  //  CONFIG & DATA (edit)
+  // =======================
+  const CONTACT = {
+    phone: '033832-8898',
+    telHref: 'tel:0338328898',
+    zalo: 'https://zalo.me/0338328898',
+    messenger: 'https://m.me/your.page',
+  };
+
+  const CATEGORIES = [
+    'Máy móc', 'Keo & Vật liệu', 'Dụng cụ đo', 'Dụng cụ cắt', 'An toàn lao động'
+  ];
+
+  const PRODUCTS = [
+    {id:'mx-001', name:'Máy cắt gạch 800W', cat:'Máy móc', price:1290000, old:1590000, tags:['máy cắt','gạch','800W'], url:'#', img:'', spec:{congsuat:'800W',trongluong:'2.3kg'}},
+    {id:'mx-002', name:'Máy mài đa năng 650W', cat:'Máy móc', price:990000, old:0, tags:['máy mài','650W'], url:'#', img:'', spec:{congsuat:'650W',trongluong:'1.8kg'}},
+    {id:'mx-003', name:'Keo ốp lát gạch mác C2', cat:'Keo & Vật liệu', price:185000, old:210000, tags:['keo','ốp lát','C2'], url:'#', img:'', spec:{khoi:'25kg',ungdung:'Gạch 60–80'}},
+    {id:'mx-004', name:'Keo chống thấm hai thành phần', cat:'Keo & Vật liệu', price:265000, old:0, tags:['chống thấm'], url:'#', img:'', spec:{dinhmuc:'1.2kg/m²',ungdung:'WC/sân thượng'}},
+    {id:'mx-005', name:'Bay răng cưa 40cm', cat:'Dụng cụ cắt', price:95000, old:0, tags:['bay','răng cưa','40cm'], url:'#', img:'', spec:{chieuDai:'40cm',vatlieu:'Thép không gỉ'}},
+    {id:'mx-006', name:'Gạt vữa lát nền 60cm', cat:'Dụng cụ cắt', price:145000, old:0, tags:['gạt vữa','60cm'], url:'#', img:'', spec:{chieuDai:'60cm',vatlieu:'Nhôm + cao su'}},
+    {id:'mx-007', name:'Thước thủy nhôm 80cm', cat:'Dụng cụ đo', price:120000, old:0, tags:['thước thủy','80cm'], url:'#', img:'', spec:{chieuDai:'80cm',doChinhXac:'0.5mm/m'}},
+    {id:'mx-008', name:'Máy cân bằng tia laser 12 tia', cat:'Dụng cụ đo', price:1690000, old:1990000, tags:['laser','12 tia'], url:'#', img:'', spec:{pin:'Lithium',phuKien:'Chân máy'}},
+    {id:'mx-009', name:'Kính bảo hộ trong suốt', cat:'An toàn lao động', price:35000, old:0, tags:['kính','an toàn'], url:'#', img:'', spec:{chongUV:'Yes'}},
+    {id:'mx-010', name:'Găng tay chống cắt cấp 5', cat:'An toàn lao động', price:65000, old:0, tags:['găng tay','chống cắt'], url:'#', img:'', spec:{cap:'EN388 Cấp 5'}},
+  ];
+
+  // =======================
+  //  UTILITIES
+  // =======================
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+  const fmtVND = n => (n||0).toLocaleString('vi-VN')+'₫';
+  const esc = s => (s+'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[m]));
+
+  function placeholderSVG(text){
+    const t = encodeURIComponent((text||'MXD').slice(0,18));
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'>\
+      <defs><linearGradient id='g' x1='0' x2='1' y1='0' y2='1'>\
+        <stop offset='0%' stop-color='%2322d3ee'/><stop offset='100%' stop-color='%2360a5fa'/>\
+      </linearGradient></defs>\
+      <rect width='100%' height='100%' fill='%230b213a'/>\
+      <rect x='0' y='0' width='100%' height='100%' fill='url(%23g)' opacity='0.15'/>\
+      <text x='50%' y='52%' dominant-baseline='middle' text-anchor='middle' font-size='56' fill='%23cfe8ff' font-family='Inter,Segoe UI,Arial'>${t}</text>\
+    </svg>`;
+    return 'data:image/svg+xml;charset=UTF-8,'+svg.replace(/\n/g,'');
+  }
+
+  // =======================
+  //  RENDER PRODUCTS
+  // =======================
+  function buildCategoryOptions(){
+    const sel = $('#cat');
+    CATEGORIES.forEach(c=>{
+      const opt = document.createElement('option');
+      opt.value = c; opt.textContent = c; sel.appendChild(opt);
+    });
+  }
+
+  function productCard(p){
+    const img = p.img || placeholderSVG(p.name);
+    const tags = (p.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('');
+    const old = p.old>0 ? `<span class="old">${fmtVND(p.old)}</span>` : '';
+    return `<div class="card" data-id="${esc(p.id)}" data-cat="${esc(p.cat)}" data-tags="${esc((p.tags||[]).join(','))}">
+      <div class="thumb"><img src="${img}" alt="${esc(p.name)}" loading="lazy" width="800" height="600"></div>
+      <div class="body">
+        <div class="title">${esc(p.name)}</div>
+        <div class="muted" style="font-size:13px">${esc(p.cat)}</div>
+        <div class="price"><span class="now">${fmtVND(p.price)}</span>${old}</div>
+        <div class="tags">${tags}</div>
+        <div class="actions">
+          <button class="btn btn-sm" data-add>Thêm vào giỏ</button>
+          <a class="btn btn-sm btn-primary" href="${p.url||'#'}" target="_blank" rel="sponsored nofollow noopener">Mua ngay</a>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function renderProducts(){
+    const q = ($('#q').value||'').toLowerCase().trim();
+    const cat = $('#cat').value;
+    const list = PRODUCTS.filter(p => {
+      const okCat = !cat || p.cat === cat;
+      const blob = (p.name+' '+p.id+' '+(p.tags||[]).join(' ')).toLowerCase();
+      const okQ = !q || blob.includes(q);
+      return okCat && okQ;
+    });
+    $('#grid').innerHTML = list.map(productCard).join('');
+    // Bind add-to-cart
+    $$('#grid [data-add]').forEach(btn=>{
+      btn.addEventListener('click', e=>{
+        const card = e.target.closest('.card');
+        const id = card.dataset.id;
+        const item = PRODUCTS.find(x=>x.id===id);
+        addToCart(item);
+      });
+    });
+    // Generate Product JSON-LD (first 10)
+    injectProductLD(list.slice(0,10));
+  }
+
+  // =======================
+  //  CART LOGIC
+  // =======================
+  const CART = new Map(); // id -> {item, qty}
+
+  function addToCart(item, qty=1){
+    const cur = CART.get(item.id) || {item, qty:0};
+    cur.qty += qty; CART.set(item.id, cur);
+    updateCartUI(); openCart();
+  }
+  function removeFromCart(id){ CART.delete(id); updateCartUI(); }
+  function changeQty(id, delta){ const cur=CART.get(id); if(!cur) return; cur.qty=Math.max(1,cur.qty+delta); updateCartUI(); }
+
+  function updateCartUI(){
+    const items = [...CART.values()];
+    $('#cartCount').textContent = items.reduce((s,x)=>s+x.qty,0);
+    $('#cartTotalQty').textContent = $('#cartCount').textContent;
+    const sum = items.reduce((s,x)=>s+x.item.price*x.qty,0);
+    $('#cartTotal').textContent = fmtVND(sum);
+    $('#cartItems').innerHTML = items.map(({item,qty})=>`
+      <div class="cart-item">
+        <div class="thumb"><img src="${item.img||placeholderSVG(item.name)}" alt="${esc(item.name)}" width="120" height="90"></div>
+        <div>
+          <div style="font-weight:600">${esc(item.name)}</div>
+          <div class="muted" style="font-size:13px">${fmtVND(item.price)} · ${esc(item.cat)}</div>
+          <div class="qty"><button class="btn btn-sm" data-dec="${item.id}">–</button> ${qty} <button class="btn btn-sm" data-inc="${item.id}">+</button></div>
+        </div>
+        <div>
+          <button class="btn" data-del="${item.id}">Xóa</button>
+        </div>
+      </div>
+    `).join('') || '<p class="muted">Giỏ hàng trống.</p>';
+
+    // bind buttons
+    $$('#cartItems [data-del]').forEach(b=>b.addEventListener('click', e=>removeFromCart(e.target.dataset.del)));
+    $$('#cartItems [data-inc]').forEach(b=>b.addEventListener('click', e=>changeQty(e.target.dataset.inc, +1)));
+    $$('#cartItems [data-dec]').forEach(b=>b.addEventListener('click', e=>changeQty(e.target.dataset.dec, -1)));
+  }
+
+  function openCart(){ $('#cartDrawer').classList.add('open'); $('#cartDrawer').setAttribute('aria-hidden','false'); }
+  function closeCart(){ $('#cartDrawer').classList.remove('open'); $('#cartDrawer').setAttribute('aria-hidden','true'); }
+
+  // Checkout: mở mỗi URL 1 lần (lọc trùng), thêm rel an toàn
+  function checkout(){
+    const urls = new Set();
+    CART.forEach(({item})=>{ if(item.url && item.url !== '#') urls.add(item.url); });
+    if(urls.size===0){ alert('Chưa có sản phẩm có link sàn. Hãy thay URL affiliate trước.'); return; }
+    urls.forEach(u=> window.open(u, '_blank', 'noopener'));
+  }
+
+  // =======================
+  //  MEMBER FORM (basic demo)
+  // =======================
+  $('#btnMember').addEventListener('click', ()=>{
+    $('#memberMsg').textContent = 'Đang gửi đăng ký…';
+    setTimeout(()=>{
+      $('#memberMsg').textContent = 'Đã ghi nhận! MXD sẽ liên hệ sớm.';
+      // TODO: thay bằng Formspree/Google Forms action
+    }, 450);
+  });
+
+  // =======================
+  //  MISC: contact links, toTop
+  // =======================
+  function bindContacts(){
+    $('#lnCall').href = CONTACT.telHref;
+    $('#lnZalo').href = CONTACT.zalo;
+    $('#lnMsg').href = CONTACT.messenger;
+    $('#fabCall').href = CONTACT.telHref;
+    $('#fabZalo').href = CONTACT.zalo;
+    $('#fabMsg').href = CONTACT.messenger;
+  }
+  function onScroll(){
+    if(window.scrollY>300) $('#toTop').classList.add('show'); else $('#toTop').classList.remove('show');
+  }
+
+  // =======================
+  //  PRODUCT JSON-LD (from list)
+  // =======================
+  function injectProductLD(list){
+    const json = list.map(p=>({
+      '@context':'https://schema.org', '@type':'Product',
+      name: p.name, sku: p.id, category: p.cat,
+      image: p.img || placeholderSVG(p.name),
+      offers: { '@type':'Offer', priceCurrency:'VND', price: String(p.price), availability:'https://schema.org/InStock' }
+    }));
+    let tag = document.getElementById('prodLD');
+    if(!tag){ tag = document.createElement('script'); tag.type='application/ld+json'; tag.id='prodLD'; document.body.appendChild(tag); }
+    tag.textContent = JSON.stringify(json);
+  }
+
+  // =======================
+  //  INIT
+  // =======================
+  buildCategoryOptions();
+  renderProducts();
+  bindContacts();
+  $('#y').textContent = new Date().getFullYear();
+
+  // Events
+  $('#q').addEventListener('input', renderProducts);
+  $('#cat').addEventListener('change', renderProducts);
+  $('#btnReset').addEventListener('click', ()=>{ $('#q').value=''; $('#cat').value=''; renderProducts(); });
+
+  $('#btnCart').addEventListener('click', openCart);
+  $('#btnCloseCart').addEventListener('click', closeCart);
+  $('#btnCheckout').addEventListener('click', checkout);
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+  </script>
 </body>
 </html>
