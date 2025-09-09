@@ -25,6 +25,7 @@
 
 <main class="wrap">
   <h1>Tin tức & Kinh nghiệm</h1>
+
   <div class="controls">
     <input id="q" type="search" placeholder="Tìm bài viết, từ khóa…"/>
     <select id="cat" aria-label="Lọc theo danh mục">
@@ -122,27 +123,24 @@
 })();
 </script>
 
-<!-- Vị trí sẽ chèn cụm nút -->
+<!-- MXD: chèn bộ nút nổi -->
 <div id="inject-fab"></div>
-
-<!-- Chèn FAB: thử /partials trước, nếu 404 thì thử /assets/partials -->
 <script>
 (function () {
   const mount = document.getElementById('inject-fab');
   if (!mount) return;
 
-  const tryFetch = (url) =>
-    fetch(url, { cache: 'no-store' }).then(r => r.ok ? r.text() : Promise.reject(url));
-
-  tryFetch('/partials/fab.html')
-    .catch(() => tryFetch('/assets/partials/fab.html'))
+  // GỌI ĐÚNG FILE đang lưu ở /assets/partials/fab.html
+  fetch('/assets/partials/fab.html', { cache: 'no-store' })
+    .then(r => r.ok ? r.text() : Promise.reject(new Error('fab 404')))
     .then(html => {
-      mount.outerHTML = html;                     // chèn cụm nút
+      mount.outerHTML = html; // chèn cụm nút
       const homeBtn = document.querySelector('.mxdfab__btn.is-home');
       const onScroll = () => homeBtn && homeBtn.classList.toggle('show', window.scrollY > 180);
-      onScroll(); window.addEventListener('scroll', onScroll);
+      onScroll();
+      window.addEventListener('scroll', onScroll);
     })
-    .catch((u) => console.warn('Không tìm thấy fab.html ở:', u));
+    .catch(err => console.warn('Không tải được fab.html:', err));
 })();
 </script>
 
