@@ -1043,5 +1043,45 @@ Máy cắt, https://..."></textarea>
   </script>
 
  
-</body>
+</body><!-- Font Awesome để có icon (nhẹ, CDN) -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  integrity="sha512-SnH5WK+bZxgPHs44uWIX+...=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- Thanh liên hệ nổi -->
+<div class="contact-fab">
+  <a class="fab-btn zalo" href="https://zalo.me/0338328898" target="_blank" aria-label="Chat Zalo">
+    <i class="fa-brands fa-zalo"></i><span>Zalo</span>
+  </a>
+  <a class="fab-btn fb" href="https://www.facebook.com/mxd6686" target="_blank" aria-label="Chat Facebook">
+    <i class="fa-brands fa-facebook-messenger"></i><span>Messenger</span>
+  </a>
+  <a class="fab-btn call" href="tel:0338328898" aria-label="Gọi 033832-8898">
+    <i class="fa-solid fa-phone"></i><span>Gọi</span>
+  </a>
+</div>
+
+<style>
+  .contact-fab{
+    position: fixed; right: 18px; bottom: 18px; display: flex; flex-direction: column;
+    gap: 10px; z-index: 9999; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
+  .fab-btn{
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px; border-radius: 999px; text-decoration: none; color: #fff;
+    box-shadow: 0 8px 24px rgba(0,0,0,.18); backdrop-filter: blur(4px); font-weight: 600;
+    transition: transform .15s ease, box-shadow .15s ease, opacity .2s ease;
+    opacity: .95;
+  }
+  .fab-btn:hover{ transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,.22); opacity: 1; }
+  .fab-btn i{ font-size: 18px; }
+  .fab-btn span{ font-size: 14px; }
+  .fab-btn.zalo{ background: #0068ff; }
+  .fab-btn.fb{ background: #0084ff; }
+  .fab-btn.call{ background: #10b981; }
+  @media (max-width: 480px){ .fab-btn span{ display: none; } }
+</style>
+
 </html>
