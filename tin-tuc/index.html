@@ -1,19 +1,23 @@
 <!doctype html>
 <html lang="vi">
 <head>
-<link rel="stylesheet" href="/assets/site.css?v=2">
-<meta charset="utf-8">
+  <meta charset="utf-8">
   <title>Tin tức MXD – Mẹo thi công & vật tư</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Tin tức MXD: mẹo thi công, bảng giá tham khảo, quy định giấy phép xây dựng, chọn vật tư thông minh.">
+  <meta name="description" content="Tin tức MXD: mẹo thi công, bảng giá, quy định & cách chọn vật tư thông minh – gọn, dễ tra cứu.">
+  <link rel="icon" href="/assets/placeholder.png">
+  <meta name="color-scheme" content="dark">
   <style>
     :root{
+      color-scheme: dark;
       --bg:#0b0f14; --card:#121821; --muted:#93a4b7; --text:#eaf2ff;
       --brand:#5eead4; --brand2:#60a5fa; --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.35);
     }
-    *{box-sizing:border-box} body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+    *{box-sizing:border-box}
+    body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       background: radial-gradient(1200px 600px at top right,#0d1520,#0b0f14 40%),var(--bg); color:var(--text)}
     a{color:inherit; text-decoration:none}
+
     .container{max-width:1100px;margin:0 auto;padding:0 20px}
     .nav{position:sticky;top:0;z-index:30;background:rgba(11,15,20,.7);backdrop-filter:blur(8px);
       border-bottom:1px solid rgba(255,255,255,.06)}
@@ -22,11 +26,23 @@
     .logo{height:34px;width:34px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand2));
       display:grid;place-items:center;color:#001218;box-shadow:var(--shadow)}
     .pill{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
-    .hero{padding:40px 0 20px;text-align:center}
+    .hero{padding:40px 0 10px;text-align:center}
     .hero h1{margin:0 0 8px;font-size:clamp(26px,4vw,42px)}
     .muted{color:var(--muted)}
-    .filters{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:10px 0 18px}
-    input[type="text"],select{padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:var(--text)}
+
+    /* Form tìm kiếm + lọc */
+    .filters{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:14px 0 18px}
+    input[type="text"],select{padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);color:var(--text)}
+    /* Dropdown tối & mũi tên */
+    select{-webkit-appearance:none;-moz-appearance:none;appearance:none;padding-right:42px;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path fill="%2393a4b7" d="M0 0l6 8 6-8z"/></svg>');
+      background-repeat:no-repeat;background-position:right 12px center}
+    select option,select optgroup{background:#0b0f14;color:var(--text)}
+    select:focus{outline:none;border-color:rgba(96,165,250,.6);box-shadow:0 0 0 3px rgba(96,165,250,.2)}
+    @media (max-width:480px){select{font-size:16px}}
+
+    /* Lưới bài viết */
     .grid{display:grid;gap:16px;grid-template-columns:repeat(1,minmax(0,1fr))}
     @media(min-width:700px){.grid{grid-template-columns:repeat(2,1fr)}}
     @media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
@@ -41,15 +57,18 @@
     .btn.brand{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#001218;border:none}
     .load{display:flex;justify-content:center;margin:18px 0 40px}
     footer{padding:38px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);margin-top:24px}
+
+    /* FAB về trang chủ (gọn nhẹ) */
+    .home-fab{position:fixed;right:16px;bottom:18px;z-index:10050;transition:.2s;transform:translateY(12px);opacity:0;pointer-events:none}
+    .home-fab.show{transform:translateY(0);opacity:1;pointer-events:auto}
+    .home-fab a{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);background:linear-gradient(135deg,var(--brand),var(--brand2));color:#001218;font-weight:700;text-decoration:none;box-shadow:var(--shadow)}
   </style>
 </head>
 <body>
   <nav class="nav">
     <div class="container nav-inner">
-      <div class="brand">
-        <div class="logo">M</div>
-        <div>MXD • Tin tức</div>
-      </div>
+      <a class="brand" href="/"><div class="logo">M</div><div>MXD • Tin tức</div></a>
       <div style="display:flex;gap:10px;align-items:center">
         <a class="pill" href="/">Trang chủ</a>
         <a class="pill" href="/index.html#products">Cửa hàng</a>
@@ -59,21 +78,15 @@
 
   <header class="hero container">
     <h1>Tin tức & Kinh nghiệm thi công</h1>
-    <p class="muted">Tổng hợp mẹo thi công, bảng giá, quy định pháp lý và cách chọn vật tư thông minh – gói gọn, dễ tra cứu.</p>
+    <p class="muted">Mẹo thi công, bảng giá, quy định pháp lý, chọn vật tư thông minh – gói gọn, dễ tra cứu.</p>
     <div class="filters">
       <input id="q" type="text" placeholder="Tìm bài viết, từ khóa…">
-      <select id="cat">
-        <option value="all">Tất cả danh mục</option>
-        <option value="Bảng giá">Bảng giá</option>
-        <option value="Quy định & pháp lý">Quy định & pháp lý</option>
-        <option value="Mẹo thi công">Mẹo thi công</option>
-        <option value="Chọn vật tư">Chọn vật tư</option>
-      </select>
+      <select id="cat" aria-label="Lọc theo danh mục"><option>Tất cả danh mục</option></select>
     </div>
   </header>
 
   <main class="container">
-    <section id="list" class="grid"></section>
+    <section id="list" class="grid" aria-live="polite"></section>
     <div class="load"><button id="more" class="btn">Xem thêm</button></div>
   </main>
 
@@ -81,12 +94,15 @@
     <div class="container">© <span id="year"></span> MXD – Hàng tin dùng của thợ.</div>
   </footer>
 
+  <!-- FAB Trang chủ -->
+  <div id="homeFab" class="home-fab"><a href="/">🏠 Trang chủ</a></div>
+
   <script>
-    // ====== DỮ LIỆU BÀI VIẾT (có thể thay bằng fetch posts.json) ======
+    // ===== DỮ LIỆU MẪU (có thể tách ra posts.json sau) =====
     const POSTS = [
       {
         slug: "bao-gia-xay-dung-2025",
-        title: "Tổng hợp bảng giá thầu – mẹo và lưu ý hợp đồng 2025",
+        title: "Tổng hợp bảng giá thầu – mẹo & lưu ý hợp đồng 2025",
         date: "2025-08-09",
         category: "Bảng giá",
         readmin: 6,
@@ -126,51 +142,81 @@
       }
     ];
 
+    // ===== UTIL =====
     const $ = s => document.querySelector(s);
-    const $$ = s => document.querySelectorAll(s);
     const fmtDate = s => new Date(s).toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'});
+    const params = new URLSearchParams(location.search);
 
-    // ====== STATE & RENDER ======
-    const STATE = { q:'', cat:'all', page:1, per:6 };
+    // ===== STATE =====
+    const STATE = {
+      q: params.get('q') || '',
+      cat: params.get('cat') || 'Tất cả danh mục',
+      page: +(params.get('page') || 1),
+      per: 6
+    };
 
+    // ===== INIT CATEGORY OPTIONS (tự động từ dữ liệu) =====
+    const CATS = ['Tất cả danh mục', ...new Set(POSTS.map(p=>p.category))];
+    const catSel = $('#cat');
+    catSel.innerHTML = CATS.map(c=>`<option value="${c}">${c}</option>`).join('');
+    catSel.value = STATE.cat;
+
+    // Prefill search box
+    $('#q').value = STATE.q;
+
+    // ===== FILTER & RENDER =====
     function filterPosts(){
       const term = STATE.q.trim().toLowerCase();
-      return POSTS.filter(p => (STATE.cat==='all' || p.category===STATE.cat) &&
-        (!term || (p.title+p.excerpt+p.tags.join(' ')).toLowerCase().includes(term)))
+      return POSTS
+        .filter(p => (STATE.cat === 'Tất cả danh mục' || p.category === STATE.cat))
+        .filter(p => !term || (p.title + ' ' + p.excerpt + ' ' + p.tags.join(' ')).toLowerCase().includes(term))
         .sort((a,b)=> new Date(b.date)-new Date(a.date));
     }
 
     function render(){
-      const list = $('#list'); list.innerHTML = '';
-      const filtered = filterPosts();
+      const list = $('#list');
+      const items = filterPosts();
       const end = STATE.page * STATE.per;
-      filtered.slice(0,end).forEach(p=>{
-        list.insertAdjacentHTML('beforeend', `
-          <article class="card">
-            <a class="thumb" href="/tin-tuc/${p.slug}.html"><img src="${p.cover}" alt="${p.title}"></a>
-            <div class="content">
-              <a href="/tin-tuc/${p.slug}.html"><strong>${p.title}</strong></a>
-              <div class="meta">
-                <span class="tag">${p.category}</span>
-                <span>${fmtDate(p.date)}</span>
-                <span>• ${p.readmin} phút đọc</span>
-              </div>
-              <p class="muted">${p.excerpt}</p>
-              <div class="meta">${p.tags.map(t=>`#${t}`).join(' ')}</div>
+      list.innerHTML = items.slice(0,end).map(p=>`
+        <article class="card">
+          <a class="thumb" href="/tin-tuc/${p.slug}.html" aria-label="${p.title}">
+            <img loading="lazy" src="${p.cover}" alt="${p.title}">
+          </a>
+          <div class="content">
+            <a href="/tin-tuc/${p.slug}.html"><strong>${p.title}</strong></a>
+            <div class="meta">
+              <span class="tag">${p.category}</span>
+              <span>${fmtDate(p.date)}</span>
+              <span>• ${p.readmin} phút đọc</span>
             </div>
-          </article>
-        `);
-      });
-      $('#more').style.display = filtered.length > end ? 'inline-flex' : 'none';
+            <p class="muted">${p.excerpt}</p>
+            <div class="meta">${p.tags.map(t=>`#${t}`).join(' ')}</div>
+          </div>
+        </article>
+      `).join('');
+
+      // Nút xem thêm
+      const more = $('#more');
+      more.style.display = (items.length > end) ? 'inline-flex' : 'none';
+
+      // Cập nhật URL (giữ state khi reload/chia sẻ)
+      const sp = new URLSearchParams({ q: STATE.q, cat: STATE.cat, page: String(STATE.page) });
+      history.replaceState(null,'','?'+sp.toString());
     }
 
-    // ====== EVENTS ======
+    // ===== EVENTS =====
     $('#q').addEventListener('input', e=>{ STATE.q = e.target.value; STATE.page = 1; render(); });
     $('#cat').addEventListener('change', e=>{ STATE.cat = e.target.value; STATE.page = 1; render(); });
     $('#more').addEventListener('click', ()=>{ STATE.page++; render(); });
 
-    // INIT
-    render(); $('#year').textContent = new Date().getFullYear();
+    // FAB show/hide
+    const fab = document.getElementById('homeFab');
+    const toggleFab = () => { (window.scrollY > 250) ? fab.classList.add('show') : fab.classList.remove('show'); };
+    window.addEventListener('scroll', toggleFab);
+
+    // ===== BOOT =====
+    render(); toggleFab();
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
