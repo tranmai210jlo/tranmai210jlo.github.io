@@ -1,0 +1,28 @@
+[
+  {
+    "id": "thi-cong-nha-ve-sinh-500tr",
+    "title": "Thi công nhà vệ sinh 500 triệu: checklist & vật tư cốt lõi",
+    "excerpt": "Kinh nghiệm thực chiến từ MXD: chống thấm, ống, gạch, keo…",
+    "date": "2025-09-09",
+    "author": "MXD Team",
+    "cover": "/assets/img/tin-tuc/ve-sinh-500tr.jpg",
+    "tags": ["thi-cong", "chong-tham", "kinh-nghiem"],
+    "category": "Kinh nghiệm",
+    "readingMins": 6,
+    "products": ["keo-chong-tham-abc", "luoi-cat-ceramic-125mm"],
+    "contentHtml": "<p>Đặt nền chống thấm chuẩn ngay từ đầu…</p><h2>1) Chống thấm</h2><p>…</p>"
+  },
+  {
+    "id": "huong-dan-chong-tham-san-thuong",
+    "title": "Hướng dẫn chống thấm sân thượng (checklist 12 bước)",
+    "excerpt": "Phân lớp, mạch ngừng, cổ ống, xử lý chân tường.",
+    "date": "2025-08-30",
+    "author": "MXD Team",
+    "cover": "/assets/img/tin-tuc/chong-tham-san-thuong.jpg",
+    "tags": ["thi-cong", "chong-tham"],
+    "category": "Tin tức",
+    "readingMins": 7,
+    "products": [],
+    "contentHtml": "<p>Đầu tiên, khảo sát độ dốc…</p>"
+  }
+]
