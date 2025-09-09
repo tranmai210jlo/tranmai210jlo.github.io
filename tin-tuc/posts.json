@@ -1,4 +1,5 @@
-[
+[<link rel="stylesheet" href="/assets/news.css?v=1">
+,
   {
     "id": "thi-cong-nha-ve-sinh-500tr",
     "title": "Thi công nhà vệ sinh 500 triệu: checklist & vật tư cốt lõi",
@@ -25,5 +26,4 @@
     "products": [],
     "contentHtml": "<p>Đầu tiên, khảo sát độ dốc…</p>"
   }
-],
-<link rel="stylesheet" href="/assets/news.css?v=1">
+]
