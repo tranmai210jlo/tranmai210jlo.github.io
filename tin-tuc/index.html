@@ -414,142 +414,81 @@
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 })();
-</script>
+</script><script>
+// MXD — Render bài viết từ /tin-tuc/posts.json (JS-only, dùng HTML sẵn có: #q, #cat, #list, #more)
+(async function () {
+  const $list = document.getElementById('list');
+  const $q    = document.getElementById('q');
+  const $cat  = document.getElementById('cat');
+  const $more = document.getElementById('more');
 
-  // ===== DỮ LIỆU BÀI VIẾT =====
-  const POSTS = [
-    {
-      slug: "bao-gia-xay-dung-2025",
-      title: "Tổng hợp bảng giá thầu – mẹo & lưu ý hợp đồng 2025",
-      date: "2025-08-09",
-      category: "Bảng giá",
-      readmin: 6,
-      cover: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop",
-      excerpt: "Khung giá nhân công, vật tư phổ biến và cách chốt điều khoản để hạn chế phát sinh.",
-      tags: ["bảng giá","hợp đồng","nhân công"]
-    },
-    {
-      slug: "quy-dinh-giay-phep",
-      title: "Checklist hồ sơ & thời gian xử lý giấy phép xây dựng",
-      date: "2025-08-09",
-      category: "Quy định & pháp lý",
-      readmin: 5,
-      cover: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop",
-      excerpt: "Những giấy tờ bắt buộc, mẫu đơn, lệ phí và lộ trình xử lý để không bị trễ tiến độ.",
-      tags: ["giấy phép","thủ tục"]
-    },
-    {
-      slug: "meo-ron-gach-sach-bong",
-      title: "Mẹo chà ron gạch sạch, kín & không ố",
-      date: "2025-08-08",
-      category: "Mẹo thi công",
-      readmin: 4,
-      cover: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1200&auto=format&fit=crop",
-      excerpt: "Chọn keo chít mạch, tỉ lệ nước, thời điểm chà và xử lý vết ố sau 1–2 tuần.",
-      tags: ["ốp lát","ron gạch"]
-    },
-    {
-      slug: "chon-keo-op-lat-ngoai-troi",
-      title: "Chọn keo ốp lát cho ban công & ngoài trời",
-      date: "2025-08-07",
-      category: "Chọn vật tư",
-      readmin: 7,
-      cover: "https://images.unsplash.com/photo-1523419409543-a7ea0c203267?q=80&w=1200&auto=format&fit=crop",
-      excerpt: "So sánh gốc xi măng vs polymer, chịu UV/mưa, độ bám và độ dày lớp dán khuyến nghị.",
-      tags: ["keo ốp lát","ngoài trời"]
+  let posts = [];
+  try {
+    const res = await fetch('/tin-tuc/posts.json', { cache: 'no-store' });
+    posts = await res.json();
+  } catch (e) {
+    console.error(e);
+    if ($list) $list.innerHTML = '<p>Lỗi tải dữ liệu bài viết.</p>';
+    return;
+  }
+
+  // Build danh mục
+  const cats = [...new Set(posts.map(p => p.category).filter(Boolean))].sort();
+  if ($cat && $cat.options.length <= 1) {
+    for (const c of cats) {
+      const opt = document.createElement('option');
+      opt.value = c; opt.textContent = c;
+      $cat.appendChild(opt);
     }
-  ];
+  }
 
-  // ===== TIỆN ÍCH =====
-  const $ = s => document.querySelector(s);
-  const fmtDate = s => new Date(s).toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'});
+  // Phân trang
+  let page = 1;
+  const PAGE_SIZE = 9;
 
-  // ===== STATE & KHỞI TẠO =====
-  const params = new URLSearchParams(location.search);
-  const STATE = {
-    q: params.get('q') || '',
-    cat: params.get('cat') || 'Tất cả danh mục',
-    page: +(params.get('page') || 1),
-    per: 6
+  const card = (p) => {
+    const dStr = new Date(p.date).toLocaleDateString('vi-VN');
+    const tags = (p.tags || []).map(t => `<span class="tag">#${t}</span>`).join(' ');
+    return `
+      <article class="post-card">
+        <a href="/tin-tuc/post.html?id=${encodeURIComponent(p.id)}" style="text-decoration:none;color:inherit">
+          <img src="${p.cover}" alt="${p.title}" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block;border-radius:8px"/>
+          <h3 style="margin:8px 0 4px;font-size:1.05rem">${p.title}</h3>
+          <p style="opacity:.9;margin:0 0 6px">${p.excerpt || ''}</p>
+          <div style="opacity:.8;font-size:.9rem;margin-bottom:6px">${dStr} · ${p.readingMins || 5} phút đọc</div>
+          <div style="display:flex;gap:.25rem;flex-wrap:wrap">${tags}</div>
+        </a>
+      </article>
+    `;
   };
 
-  // Danh mục + mục gộp “Kinh nghiệm…”
-  const CATS_RAW = [...new Set(POSTS.map(p=>p.category))];
-  const CATS = ['Tất cả danh mục', 'Kinh nghiệm (mẹo + chọn vật tư)', ...CATS_RAW];
-  const catSel = $('#cat');
-  catSel.innerHTML = CATS.map(c=>`<option value="${c}">${c}</option>`).join('');
-  if (!CATS.includes(STATE.cat)) STATE.cat = 'Tất cả danh mục';
-  catSel.value = STATE.cat;
-
-  // Prefill ô tìm kiếm
-  $('#q').value = STATE.q;
-
-  // ===== LỌC & VẼ DANH SÁCH =====
-  function filterPosts(){
-    const term = STATE.q.trim().toLowerCase();
-
-    return POSTS
-      .filter(p => {
-        const inCat =
-          STATE.cat === 'Tất cả danh mục' ||
-          p.category === STATE.cat ||
-          (
-            STATE.cat === 'Kinh nghiệm (mẹo + chọn vật tư)' &&
-            (p.category === 'Mẹo thi công' || p.category === 'Chọn vật tư')
-          );
-
-        const inText = !term || (p.title + ' ' + p.excerpt + ' ' + p.tags.join(' '))
-          .toLowerCase().includes(term);
-
-        return inCat && inText;
-      })
-      .sort((a,b)=> new Date(b.date) - new Date(a.date));
+  function filtered() {
+    const q = ($q?.value || '').toLowerCase().trim();
+    const c = $cat?.value || '';
+    return posts.filter(p => {
+      const hitCat = !c || p.category === c;
+      const hay = [p.title, p.excerpt, ...(p.tags || [])].join(' ').toLowerCase();
+      const hitQ = !q || hay.includes(q);
+      return hitCat && hitQ;
+    });
   }
 
-  function render(){
-    const list = $('#list');
-    const items = filterPosts();
-    const end = STATE.page * STATE.per;
-
-    list.innerHTML = items.slice(0,end).map(p=>`
-      <article class="card">
-        <a class="thumb" href="/tin-tuc/${p.slug}.html" aria-label="${p.title}">
-          <img loading="lazy" src="${p.cover}" alt="${p.title}">
-        </a>
-        <div class="content">
-          <a href="/tin-tuc/${p.slug}.html"><strong>${p.title}</strong></a>
-          <div class="meta">
-            <span class="tag">${p.category}</span>
-            <span>${fmtDate(p.date)}</span>
-            <span>• ${p.readmin} phút đọc</span>
-          </div>
-          <p class="muted">${p.excerpt}</p>
-          <div class="meta">${p.tags.map(t=>`#${t}`).join(' ')}</div>
-        </div>
-      </article>
-    `).join('');
-
-    const more = $('#more');
-    more.style.display = (items.length > end) ? 'inline-flex' : 'none';
-
-    const sp = new URLSearchParams({ q: STATE.q, cat: STATE.cat, page: String(STATE.page) });
-    history.replaceState(null,'','?'+sp.toString());
+  function render(reset = false) {
+    const data = filtered();
+    if (reset) page = 1;
+    const slice = data.slice(0, page * PAGE_SIZE);
+    $list.innerHTML = slice.map(card).join('') || '<p>Không có bài phù hợp.</p>';
+    if ($more) $more.style.display = slice.length < data.length ? '' : 'none';
   }
 
-  // ===== SỰ KIỆN =====
-  $('#q').addEventListener('input', e=>{ STATE.q = e.target.value; STATE.page = 1; render(); });
-  $('#cat').addEventListener('change', e=>{ STATE.cat = e.target.value; STATE.page = 1; render(); });
-  $('#more').addEventListener('click', ()=>{ STATE.page++; render(); });
+  $q?.addEventListener('input', () => render(true));
+  $cat?.addEventListener('change', () => render(true));
+  $more?.addEventListener('click', () => { page++; render(false); });
 
-  // FAB Trang chủ
-  const fab = document.getElementById('homeFab');
-  const toggleFab = () => { (window.scrollY > 250) ? fab.classList.add('show') : fab.classList.remove('show'); };
-  window.addEventListener('scroll', toggleFab);
-
-  // ===== BOOT =====
-  render(); toggleFab();
-  document.getElementById('year').textContent = new Date().getFullYear();
+  render(true);
+})();
 </script>
+
   
 </body>
 </html>
