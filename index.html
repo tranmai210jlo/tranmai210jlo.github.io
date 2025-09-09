@@ -109,8 +109,9 @@ select:focus{
     .form { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
 
     /* ADMIN (ẩn mặc định) */
-    .admin-only{display:none}
-    .admin-visible .admin-only{display:initial}
+.admin-only{display:none !important;}
+.admin-visible .admin-only{display:initial !important;}
+
 
     /* FOOTER */
     footer { padding: 38px 0; color: var(--muted); border-top: 1px solid rgba(255,255,255,.06); }
@@ -118,7 +119,6 @@ select:focus{
   .actions{display:flex;gap:.5rem;flex-wrap:wrap}
   .actions .helper{flex-basis:100%;margin-top:.25rem;font-size:.95rem;opacity:.85}
 </style>
-
 </head>
 <body>
   <nav class="nav">
@@ -172,7 +172,9 @@ select:focus{
         <input id="search" class="search" type="text" placeholder="Tìm tên sản phẩm, mã, công dụng…" />
       </div>
       <div id="grid" class="grid"></div>
-      <p class="muted" style="margin-top:8px;font-size:12px">Mẹo: thêm <code>#admin</code> vào cuối URL để mở chế độ quản trị và nhập link affiliate hàng loạt.</p>
+      <p id="adminTip" class="muted" hidden>
+  Mẹo: thêm <code>#admin</code> vào cuối URL để mở chế độ quản trị.
+</p>
     </section>
 
     <!-- MEMBERSHIP -->
