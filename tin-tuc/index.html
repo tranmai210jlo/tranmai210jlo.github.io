@@ -2,7 +2,24 @@
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Tin tức & Kinh nghiệm MXD</title>
 <link rel="stylesheet" href="/assets/news.css?v=1">
-</head><body><header class="nav">
+</head><link rel="stylesheet" href="/assets/css/fab.css">
+
+<!-- Vị trí sẽ chèn cụm nút -->
+<div id="inject-fab"></div>
+
+<script>
+  (function () {
+    const mount = document.getElementById('inject-fab');
+    if (!mount) return;
+    fetch('/partials/fab.html').then(r => r.text()).then(html => {
+      mount.outerHTML = html;                     // chèn cụm nút
+      const homeBtn = document.querySelector('.mxdfab__btn.is-home');
+      const toggle = () => homeBtn && homeBtn.classList.toggle('show', window.scrollY > 180);
+      toggle(); window.addEventListener('scroll', toggle);
+    });
+  })();
+</script>
+<body><header class="nav">
   <div class="nav-inner">
     <a href="/" class="brand">MXD</a>
     <nav>
