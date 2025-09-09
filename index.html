@@ -1089,6 +1089,23 @@ Máy cắt, https://..."></textarea>
   </script>
 
  
+<!-- Quick Contact + Home FAB -->
+<div id="qc" class="qc">
+  <a href="https://zalo.me/" target="_blank" rel="nofollow">Zalo</a>
+  <a href="https://www.facebook.com/mxd6686" target="_blank" rel="nofollow">Messenger</a>
+  <a href="tel:0338328898">Gọi</a>
+  <a href="/" class="home" title="Về Trang chủ">Trang chủ</a>
+</div>
+
+<script>
+  // Chỉ hiện nút "Trang chủ" khi cuộn xuống > 250px
+  (function () {
+    const $qc = document.getElementById('qc');
+    function onScroll(){ if(!$qc) return; $qc.classList[window.scrollY > 250 ? 'add' : 'remove']('show'); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
 </body><!-- Font Awesome để có icon (nhẹ, CDN) -->
 <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 <link rel="stylesheet"
