@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>Tin tức MXD – Mẹo thi công & vật tư</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tin tức MXD: mẹo thi công, bảng giá tham khảo, quy định giấy phép xây dựng, chọn vật tư thông minh.">
+  <style>
+    :root{
+      --bg:#0b0f14; --card:#121821; --muted:#93a4b7; --text:#eaf2ff;
+      --brand:#5eead4; --brand2:#60a5fa; --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box} body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background: radial-gradient(1200px 600px at top right,#0d1520,#0b0f14 40%),var(--bg); color:var(--text)}
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+    .nav{position:sticky;top:0;z-index:30;background:rgba(11,15,20,.7);backdrop-filter:blur(8px);
+      border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:800}
+    .logo{height:34px;width:34px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand2));
+      display:grid;place-items:center;color:#001218;box-shadow:var(--shadow)}
+    .pill{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+    .hero{padding:40px 0 20px;text-align:center}
+    .hero h1{margin:0 0 8px;font-size:clamp(26px,4vw,42px)}
+    .muted{color:var(--muted)}
+    .filters{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:10px 0 18px}
+    input[type="text"],select{padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:var(--text)}
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(1,minmax(0,1fr))}
+    @media(min-width:700px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .thumb{aspect-ratio:16/10;background:#0f1621}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .content{padding:14px;display:grid;gap:8px}
+    .meta{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+    .tag{padding:4px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.1)}
+    .btn{padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));color:var(--text);cursor:pointer}
+    .btn.brand{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#001218;border:none}
+    .load{display:flex;justify-content:center;margin:18px 0 40px}
+    footer{padding:38px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);margin-top:24px}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo">M</div>
+        <div>MXD • Tin tức</div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="pill" href="/">Trang chủ</a>
+        <a class="pill" href="/index.html#products">Cửa hàng</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero container">
+    <h1>Tin tức & Kinh nghiệm thi công</h1>
+    <p class="muted">Tổng hợp mẹo thi công, bảng giá, quy định pháp lý và cách chọn vật tư thông minh – gói gọn, dễ tra cứu.</p>
+    <div class="filters">
+      <input id="q" type="text" placeholder="Tìm bài viết, từ khóa…">
+      <select id="cat">
+        <option value="all">Tất cả danh mục</option>
+        <option value="Bảng giá">Bảng giá</option>
+        <option value="Quy định & pháp lý">Quy định & pháp lý</option>
+        <option value="Mẹo thi công">Mẹo thi công</option>
+        <option value="Chọn vật tư">Chọn vật tư</option>
+      </select>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="list" class="grid"></section>
+    <div class="load"><button id="more" class="btn">Xem thêm</button></div>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> MXD – Hàng tin dùng của thợ.</div>
+  </footer>
+
+  <script>
+    // ====== DỮ LIỆU BÀI VIẾT (có thể thay bằng fetch posts.json) ======
+    const POSTS = [
+      {
+        slug: "bao-gia-xay-dung-2025",
+        title: "Tổng hợp bảng giá thầu – mẹo và lưu ý hợp đồng 2025",
+        date: "2025-08-09",
+        category: "Bảng giá",
+        readmin: 6,
+        cover: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop",
+        excerpt: "Khung giá nhân công, vật tư phổ biến và cách chốt điều khoản để hạn chế phát sinh.",
+        tags: ["bảng giá","hợp đồng","nhân công"]
+      },
+      {
+        slug: "quy-dinh-giay-phep",
+        title: "Checklist hồ sơ & thời gian xử lý giấy phép xây dựng",
+        date: "2025-08-09",
+        category: "Quy định & pháp lý",
+        readmin: 5,
+        cover: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop",
+        excerpt: "Những giấy tờ bắt buộc, mẫu đơn, lệ phí và lộ trình xử lý để không bị trễ tiến độ.",
+        tags: ["giấy phép","thủ tục"]
+      },
+      {
+        slug: "meo-ron-gach-sach-bong",
+        title: "Mẹo chà ron gạch sạch, kín & không ố",
+        date: "2025-08-08",
+        category: "Mẹo thi công",
+        readmin: 4,
+        cover: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1200&auto=format&fit=crop",
+        excerpt: "Chọn keo chít mạch, tỉ lệ nước, thời điểm chà và xử lý vết ố sau 1–2 tuần.",
+        tags: ["ốp lát","ron gạch"]
+      },
+      {
+        slug: "chon-keo-op-lat-ngoai-troi",
+        title: "Chọn keo ốp lát cho ban công & ngoài trời",
+        date: "2025-08-07",
+        category: "Chọn vật tư",
+        readmin: 7,
+        cover: "https://images.unsplash.com/photo-1523419409543-a7ea0c203267?q=80&w=1200&auto=format&fit=crop",
+        excerpt: "So sánh gốc xi măng vs polymer, chịu UV/mưa, độ bám và độ dày lớp dán khuyến nghị.",
+        tags: ["keo ốp lát","ngoài trời"]
+      }
+    ];
+
+    const $ = s => document.querySelector(s);
+    const $$ = s => document.querySelectorAll(s);
+    const fmtDate = s => new Date(s).toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'});
+
+    // ====== STATE & RENDER ======
+    const STATE = { q:'', cat:'all', page:1, per:6 };
+
+    function filterPosts(){
+      const term = STATE.q.trim().toLowerCase();
+      return POSTS.filter(p => (STATE.cat==='all' || p.category===STATE.cat) &&
+        (!term || (p.title+p.excerpt+p.tags.join(' ')).toLowerCase().includes(term)))
+        .sort((a,b)=> new Date(b.date)-new Date(a.date));
+    }
+
+    function render(){
+      const list = $('#list'); list.innerHTML = '';
+      const filtered = filterPosts();
+      const end = STATE.page * STATE.per;
+      filtered.slice(0,end).forEach(p=>{
+        list.insertAdjacentHTML('beforeend', `
+          <article class="card">
+            <a class="thumb" href="/tin-tuc/${p.slug}.html"><img src="${p.cover}" alt="${p.title}"></a>
+            <div class="content">
+              <a href="/tin-tuc/${p.slug}.html"><strong>${p.title}</strong></a>
+              <div class="meta">
+                <span class="tag">${p.category}</span>
+                <span>${fmtDate(p.date)}</span>
+                <span>• ${p.readmin} phút đọc</span>
+              </div>
+              <p class="muted">${p.excerpt}</p>
+              <div class="meta">${p.tags.map(t=>`#${t}`).join(' ')}</div>
+            </div>
+          </article>
+        `);
+      });
+      $('#more').style.display = filtered.length > end ? 'inline-flex' : 'none';
+    }
+
+    // ====== EVENTS ======
+    $('#q').addEventListener('input', e=>{ STATE.q = e.target.value; STATE.page = 1; render(); });
+    $('#cat').addEventListener('change', e=>{ STATE.cat = e.target.value; STATE.page = 1; render(); });
+    $('#more').addEventListener('click', ()=>{ STATE.page++; render(); });
+
+    // INIT
+    render(); $('#year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
