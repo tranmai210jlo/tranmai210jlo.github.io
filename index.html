@@ -739,6 +739,21 @@ Máy cắt, https://..."></textarea>
     /* FOOTER */
     footer { padding: 38px 0; color: var(--muted); border-top: 1px solid rgba(255,255,255,.06); }
   </style>
+<style>
+  /* các CSS khác, .actions .helper,... */
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var isAdmin = (location.hash === '#admin');
+  document.documentElement.classList.toggle('admin-visible', isAdmin);
+  var tip = document.getElementById('adminTip');
+  if (tip) tip.hidden = !isAdmin;   // Lưu ý: .hidden viết thường
+});
+</script>
+</head>
+<body>
+
 </head>
 <body>
   <nav class="nav">
