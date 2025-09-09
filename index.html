@@ -1063,21 +1063,6 @@ Máy cắt, https://..."></textarea>
   </a>
 </div>
 
-/* Nút nổi về Trang chủ */
-.home-fab{
-  position:fixed; right:16px; bottom:82px; /* cao hơn contact-fab */
-  z-index:990;
-  transition:.2s; transform:translateY(12px); opacity:0; pointer-events:none;
-}
-.home-fab.show{ transform:translateY(0); opacity:1; pointer-events:auto; }
-.home-fab a{
-  display:inline-flex; align-items:center; gap:8px;
-  padding:10px 14px; border-radius:999px;
-  border:1px solid rgba(255,255,255,.08);
-  background:linear-gradient(135deg,#5eead4,#60a5fa);
-  color:#001218; font-weight:700; text-decoration:none;
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-}
 <style>
   .contact-fab{
     position: fixed; right: 18px; bottom: 18px; display: flex; flex-direction: column;
@@ -1097,6 +1082,21 @@ Máy cắt, https://..."></textarea>
   .fab-btn.fb{ background: #0084ff; }
   .fab-btn.call{ background: #10b981; }
   @media (max-width: 480px){ .fab-btn span{ display: none; } }
+/* Nút nổi về Trang chủ */
+.home-fab{
+  position:fixed; right:16px; bottom:82px; /* cao hơn contact-fab */
+  z-index:990;
+  transition:.2s; transform:translateY(12px); opacity:0; pointer-events:none;
+}
+.home-fab.show{ transform:translateY(0); opacity:1; pointer-events:auto; }
+.home-fab a{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 14px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.08);
+  background:linear-gradient(135deg,#5eead4,#60a5fa);
+  color:#001218; font-weight:700; text-decoration:none;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
 </style><div id="homeFab" class="home-fab">
   <a href="/">🏠 Trang chủ</a>
 </div>
