@@ -155,21 +155,56 @@
     };
 
     // ===== INIT CATEGORY OPTIONS (tự động từ dữ liệu) =====
-    const CATS = ['Tất cả danh mục', ...new Set(POSTS.map(p=>p.category))];
-    const catSel = $('#cat');
-    catSel.innerHTML = CATS.map(c=>`<option value="${c}">${c}</option>`).join('');
-    catSel.value = STATE.cat;
+    // Tạo danh sách danh mục + mục gộp “Kinh nghiệm…”
+const CATS_RAW = [...new Set(POSTS.map(p=>p.category))];
+const CATS = ['Tất cả danh mục', 'Kinh nghiệm (mẹo + chọn vật tư)', ...CATS_RAW];
+
+const catSel = $('#cat');
+catSel.innerHTML = CATS.map(c=>`<option value="${c}">${c}</option>`).join('');
+catSel.value = STATE.cat;
 
     // Prefill search box
     $('#q').value = STATE.q;
 
     // ===== FILTER & RENDER =====
     function filterPosts(){
-      const term = STATE.q.trim().toLowerCase();
-      return POSTS
-        .filter(p => (STATE.cat === 'Tất cả danh mục' || p.category === STATE.cat))
-        .filter(p => !term || (p.title + ' ' + p.excerpt + ' ' + p.tags.join(' ')).toLowerCase().includes(term))
-        .sort((a,b)=> new Date(b.date)-new Date(a.date));
+  const term = STATE.q.trim().toLowerCase();
+
+  return POSTS
+    .filter(p => {
+      const inCat =
+        STATE.cat === 'Tất cả danh mục' ||
+        p.category === STATE.cat ||
+        (
+          STATE.cat === 'Kinh nghiệm (mẹo + chọn vật tư)' &&
+          (p.category === 'Mẹo thi công' || p.category === 'Chọn vật tư')
+        );
+      const inText = !term || (p.title + ' ' + p.excerpt + ' ' + p.tags.join(' '))
+        .toLowerCase().includes(term);
+      return inCat && inText;
+    })
+    .sort((a,b)=> new Date(b.date) - new Date(a.date));
+}
+
+      // khớp danh mục (có mục gộp “Kinh nghiệm…”)
+      const inCat =
+        STATE.cat === 'Tất cả danh mục' ||
+        p.category === STATE.cat ||
+        (
+          STATE.cat === 'Kinh nghiệm (mẹo + chọn vật tư)' &&
+          (p.category === 'Mẹo thi công' || p.category === 'Chọn vật tư')
+        );
+
+      // khớp từ khóa
+      const inText = !term || (p.title + ' ' + p.excerpt + ' ' + p.tags.join(' '))
+        .toLowerCase()
+        .includes(term);
+
+      return inCat && inText;
+    })
+    .sort((a,b)=> new Date(b.date) - new Date(a.date));
+}
+
     }
 
     function render(){
