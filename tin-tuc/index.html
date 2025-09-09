@@ -329,7 +329,9 @@
 
   function filtered() {
     const q = ($q?.value || '').toLowerCase().trim();
-    const c = $cat?.value || '';
+    const rawCat = ($cat?.value || '').trim();
+const c = (!rawCat || rawCat.toLowerCase().includes('tất cả')) ? '' : rawCat;
+
     return posts.filter(p => {
       const hitCat = !c || p.category === c;
       const hay = [p.title, p.excerpt, ...(p.tags || [])].join(' ').toLowerCase();
