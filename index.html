@@ -755,7 +755,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 </head>
-<body>
+<!-- DUP START: old home block (commented out)
+
+  <body>
 
 </head>
 <body>
@@ -1198,7 +1200,8 @@ document.addEventListener('DOMContentLoaded', function () {
 </style><div id="homeFab" class="home-fab">
   <a href="/">🏠 Trang chủ</a>
 </div>
-<script>
+DUP END -->
+  <script>
   const fab = document.getElementById('homeFab');
   const toggleFab = () => {
     if (window.scrollY > 250) fab.classList.add('show');
@@ -1208,5 +1211,6 @@ document.addEventListener('DOMContentLoaded', function () {
   toggleFab();
 </script>
 
-
+</body>
 </html>
+
