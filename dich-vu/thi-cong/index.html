@@ -1,43 +1,205 @@
-<!doctype html><html lang="vi"><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dịch vụ | MXD</title>
-<link rel="stylesheet" href="/assets/site.css">
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dịch vụ – MXD</title>
+  <meta name="description" content="Dịch vụ thi công xây dựng của MXD: Xây nhà trọn gói, phần thô, cải tạo sửa chữa.">
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --card: #121821;
+      --muted: #93a4b7;
+      --text: #eaf2ff;
+      --brand: #5eead4;
+      --brand-2: #60a5fa;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 600px at top right, #0d1520, #0b0f14 40%), var(--bg);
+      color: var(--text);
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+
+    nav {
+      background: rgba(11,15,20,0.7);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 16px 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+    }
+    .logo {
+      height: 34px;
+      width: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      display: grid;
+      place-items: center;
+      color: #001218;
+      font-weight: 900;
+      box-shadow: var(--shadow);
+    }
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      transition: .2s;
+    }
+    .pill:hover {
+      background: rgba(255,255,255,.08);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      padding: 60px 0 30px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 32px;
+      margin-bottom: 14px;
+    }
+    .hero p {
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0 auto 20px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .card {
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.05);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .card h2 {
+      margin-top: 0;
+      color: var(--text);
+    }
+    .card p, .card ul {
+      color: var(--muted);
+    }
+    .card ul {
+      padding-left: 20px;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #001218;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    footer {
+      padding: 38px 0;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,.06);
+      text-align: center;
+      margin-top: 60px;
+    }
+  </style>
+</head>
 <body>
-<header class="site-header">
-  <a href="/" class="logo">MXD</a>
-  <nav class="nav">
-    <a href="/dich-vu/">Dịch vụ</a>
-    <a href="/tin-tuc/">Tin tức</a>
-    <a href="/kinh-nghiem/">Kinh nghiệm</a>
-    <a href="/lien-he/">Liên hệ</a>
+
+  <nav>
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo">M</div>
+        <a href="index.html"><strong>MXD • Trang chủ</strong></a>
+      </div>
+      <div class="nav-links">
+        <a href="index.html" class="pill">Trang chủ</a>
+        <a href="store.html" class="pill">Cửa hàng</a>
+        <a href="dich-vu.html" class="pill">Dịch vụ</a>
+        <a href="tin-tuc.html" class="pill">Tin tức</a>
+        <a href="chinh-sach.html" class="pill">Chính sách</a>
+        <a href="contact.html" class="pill">Liên hệ</a>
+      </div>
+    </div>
   </nav>
-</header>
 
-<main class="container">
-  <h1>Dịch vụ thi công & xây dựng</h1>
-  <p>Thi công trọn gói – Uy tín – Bảo hành minh bạch.</p>
+  <header class="hero container">
+    <h1>Dịch vụ thi công & xây dựng</h1>
+    <p>Thi công trọn gói – Uy tín – Bảo hành minh bạch.</p>
+  </header>
 
-  <section class="grid">
-    <article class="card">
-      <h2>Xây nhà trọn gói</h2>
-      <p>Thiết kế – Xin phép – Thi công – Bảo hành.</p>
-      <ul><li>Minh bạch vật tư</li><li>Giám sát 24/7</li><li>Tiến độ cam kết</li></ul>
-      <a class="btn" href="/lien-he/">Nhận báo giá</a>
-    </article>
+  <main class="container">
+    <section class="grid">
+      <article class="card">
+        <h2>Xây nhà trọn gói</h2>
+        <p>Thiết kế – Xin phép – Thi công – Bảo hành.</p>
+        <ul>
+          <li>Minh bạch vật tư</li>
+          <li>Giám sát 24/7</li>
+          <li>Tiến độ cam kết</li>
+        </ul>
+        <a class="btn" href="/lien-he/">Nhận báo giá</a>
+      </article>
 
-    <article class="card">
-      <h2>Thi công phần thô</h2>
-      <p>Kết cấu – Tường – Mái – Điện nước âm.</p>
-      <ul><li>Đội ngũ tay nghề cao</li><li>Kiểm định an toàn</li></ul>
-      <a class="btn" href="/lien-he/">Nhận báo giá</a>
-    </article>
+      <article class="card">
+        <h2>Thi công phần thô</h2>
+        <p>Kết cấu – Tường – Mái – Điện nước âm.</p>
+        <ul>
+          <li>Đội ngũ tay nghề cao</li>
+          <li>Kiểm định an toàn</li>
+        </ul>
+        <a class="btn" href="/lien-he/">Nhận báo giá</a>
+      </article>
 
-    <article class="card">
-      <h2>Sửa chữa – Cải tạo</h2>
-      <p>Nâng tầng, thay đổi công năng, chống nứt – thấm.</p>
-      <ul><li>Khảo sát miễn phí</li><li>Báo giá trong 24h</li></ul>
-      <a class="btn" href="/lien-he/">Nhận báo giá</a>
-    </article>
-  </section>
-</main>
-</body></html>
+      <article class="card">
+        <h2>Sửa chữa – Cải tạo</h2>
+        <p>Nâng tầng, thay đổi công năng, chống nứt – thấm.</p>
+        <ul>
+          <li>Khảo sát miễn phí</li>
+          <li>Báo giá trong 24h</li>
+        </ul>
+        <a class="btn" href="/lien-he/">Nhận báo giá</a>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> MXD – Thiết kế & vận hành bởi MXD. Liên hệ: <a href="mailto:mxd6686@gmail.com">mxd6686@gmail.com</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
