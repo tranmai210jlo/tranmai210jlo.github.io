@@ -26,11 +26,47 @@
 
     <!-- Khu vực sản phẩm -->
     <div class="grid">
-      <!-- Sản phẩm sẽ chèn ở Bước 2 -->
+      <article class="card product" id="hukan-g1" style="border:1px solid #eee;border-radius:12px;overflow:hidden">
+  <!-- Ảnh chính -->
+  <img id="img-hukan-g1"
+       src="/assets/img/products/hukan-1.webp"
+       alt="Máy cắt mài HUKAN G1 AH100HD (800W)"
+       style="width:100%;aspect-ratio:1/1;object-fit:cover">
+
+  <div style="padding:12px">
+    <h3 style="margin:0 0 8px;font-size:16px">Máy cắt mài HUKAN G1 AH100HD (800W)</h3>
+    <p style="margin:0 0 12px;color:#666">Đĩa 100mm, công suất 800W, nhẹ – phù hợp thi công dân dụng.</p>
+
+    <!-- DÁN LINK GỐC SHOPEE (chưa affiliate).
+         Script /mxd-affiliate.js sẽ tự rewrite sang deep link của bạn -->
+    <a class="btn" data-merchant="shopee"
+       href="https://shopee.vn/duong-dan-san-pham-hukan-g1">
+      Mua ngay
+    </a>
+  </div>
+
+  <!-- Gallery ảnh phụ: click thumbnail để đổi ảnh chính -->
+  <div class="thumbs" style="display:flex;gap:8px;padding:0 12px 12px">
+    <img src="/assets/img/products/hukan-1.webp" data-target="#img-hukan-g1" alt="HUKAN G1 - ảnh 1" width="64" height="64" style="cursor:pointer;border:1px solid #eee;border-radius:8px;object-fit:cover">
+    <img src="/assets/img/products/hukan-2.webp" data-target="#img-hukan-g1" alt="HUKAN G1 - ảnh 2" width="64" height="64" style="cursor:pointer;border:1px solid #eee;border-radius:8px;object-fit:cover">
+    <img src="/assets/img/products/hukan-tskt.webp" data-target="#img-hukan-g1" alt="HUKAN G1 - thông số" width="64" height="64" style="cursor:pointer;border:1px solid #eee;border-radius:8px;object-fit:cover">
+  </div>
+</article>
+
     </div>
   </main>
 
   <!-- Quan trọng: bật rewrite affiliate cho Shopee/Lazada/Tiki -->
+  <script>
+document.addEventListener('click', (e) => {
+  const t = e.target;
+  if (t.matches('.thumbs img')) {
+    const main = document.querySelector(t.getAttribute('data-target'));
+    if (main) main.src = t.src;
+  }
+});
+</script>
+
   <script src="/mxd-affiliate.js"></script>
 </body>
 </html>
