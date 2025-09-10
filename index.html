@@ -150,13 +150,23 @@
 
   <body>
   <header>
+
+    <!-- Nút vào cửa hàng MXD (hiển thị ngay trên trang chủ) -->
+<div class="container" style="max-width:1100px;margin:0 auto;padding:16px">
+  <a href="/store.html"
+     style="display:inline-block;padding:10px 14px;border:1px solid #111;border-radius:10px;text-decoration:none;color:#111;background:#fff">
+    🛒 Vào Cửa hàng MXD
+  </a>
+</div>
+
     <div class="container nav">
       <a href="#" class="logo" aria-label="Trang chủ MXD">
         <span class="logo-badge">MXD</span> MXD – Dụng cụ thi công
       </a>
       <nav class="menu" aria-label="Điều hướng chính">
   <a href="/">Trang chủ</a>
-  <a href="#san-pham">Sản phẩm</a>
+  <a href="/store.html" aria-label="Cửa hàng MXD">Cửa hàng</a>
+ <a href="#san-pham">Sản phẩm</a>
   <a href="#tin-tuc">Tin tức & Kinh nghiệm</a>
   <a href="#dich-vu">Dịch vụ</a>
   <a href="#dang-ky">Thành viên</a>
@@ -166,6 +176,8 @@
       <div class="cta">
         <button class="btn" id="btnCart" aria-label="Mở giỏ hàng">Giỏ hàng (<span id="cartCount">0</span>)</button>
         <a class="btn btn-primary" href="#san-pham">Mua ngay</a>
+        <a class="btn" href="/store.html" aria-label="Vào Cửa hàng MXD">🛒 Vào Cửa hàng MXD</a>
+
       </div>
     </div>
   </header>
