@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MXD – Cửa hàng Affiliate & Thi công</title>
+  <title>MXD – Cửa hàng & Thi công</title>
   <meta name="description" content="MXD – Trung tâm mua sắm dụng cụ thi công & vật tư xây dựng. Bán hàng qua link affiliate và nhận thi công trực tiếp." />
   <style>
     :root {
@@ -104,9 +104,9 @@
   </nav>
 
   <header class="hero container">
-    <h1>MXD – Trung tâm mua sắm affiliate ngành xây dựng</h1>
-    <p>Chúng tôi bán hàng <strong>qua link affiliate</strong> và <strong>trực tiếp thi công</strong>. Hàng đã được đội thợ dùng thật ngoài công trình, ưu tiên những dòng bền bỉ – tối ưu chi phí.
-      <br />Nút mua đã được đổi thành <strong>“Mua ngay”</strong> như yêu cầu. Thêm cả <strong>“Thêm vào giỏ”</strong> để gom nhiều món trước khi thanh toán.</p>
+    <h1>MXD – Trung tâm mua sắm ngành xây dựng</h1>
+    <p>Chúng tôi bán hàng <strong> và <strong>trực tiếp thi công</strong>. MXD đã lựa chọn sẵn cho bạn ưu tiên những dòng bền bỉ – tối ưu chi phí.
+      
     <div class="hero-cta">
       <a href="#products" class="btn brand">Khám phá sản phẩm</a>
       <a href="#membership" class="btn">Đăng ký thành viên MXD</a>
@@ -117,7 +117,7 @@
     <!-- PRODUCTS -->
     <section id="products" class="section">
       <h2>Sản phẩm nổi bật</h2>
-      <p class="muted">Chọn danh mục hoặc tìm kiếm. Nhấn <em>Mua ngay</em> để đi đến link affiliate; nhấn <em>Thêm vào giỏ</em> để giữ lại nhiều món rồi thanh toán sau.</p>
+      <p class="muted">Chọn danh mục hoặc tìm kiếm. Nhấn <em>Mua ngay</em> để thanh toán; nhấn <em>Thêm vào giỏ</em> để thanh toán sau. </p>
       <div class="filters">
         <select id="category" class="opt">
           <option value="all">Tất cả danh mục</option>
@@ -333,15 +333,5 @@
     updateCartUI();
     $('#year').textContent = new Date().getFullYear();
   </script>
-
-  <!-- HƯỚNG DẪN NHANH (ghi chú trong file):
-    1) Đổi chữ "Mua qua link affiliate" thành "Mua ngay": ĐÃ LÀM.
-    2) Thêm nút "Thêm vào giỏ": ĐÃ LÀM – có giỏ hàng, tăng/giảm số lượng, xóa, tổng tiền. Lưu localStorage.
-    3) Trang chủ có mục "Đăng ký thành viên": ĐÃ LÀM – dùng Formspree (thay your-form-id) hoặc Google Forms.
-    4) Thêm danh mục, tìm kiếm: ĐÃ LÀM.
-    5) Thay link affiliate: sửa trường affiliateUrl trong mảng PRODUCTS ở trên.
-    6) Tùy chọn sản phẩm (size/loại): ĐÃ LÀM qua <select> options, tách SKU theo biến thể.
-    7) GitHub Pages: chỉ cần commit file này làm index.html (đổi tên file sang index.html) là chạy.
-  -->
-</body>
+ </body>
 </html>
